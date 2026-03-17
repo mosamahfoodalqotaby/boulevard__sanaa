@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1771972928870,
+      "tag": "0000_sleepy_mandarin",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1771973243187,
+      "tag": "0001_marvelous_ser_duncan",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1772471108809,
+      "tag": "0002_wooden_sentinel",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1772472375654,
+      "tag": "0003_plain_speed",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1772687020233,
+      "tag": "0004_bored_pyro",
+      "breakpoints": true
+    }
+  ]
+}

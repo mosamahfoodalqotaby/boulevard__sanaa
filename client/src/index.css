@@ -1,0 +1,236 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@font-face {
+  font-family: 'Shams';
+  src: url('/Shams.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* الألوان الذهبية المطفية الملكية - Boulevard Sanaa Matte Gold Colors */
+  --primary: #C5A059;
+  --primary-foreground: #1e1b1c;
+  --sidebar-primary: #C5A059;
+  --sidebar-primary-foreground: #1e1b1c;
+  --chart-1: #C5A059;
+  --chart-2: #B89447;
+  --chart-3: #AB8835;
+  --chart-4: #9E7C23;
+  --chart-5: #917011;
+  --radius: 0.65rem;
+  
+  /* الخلفية ورقية داكنة والنصوص ذهبية مطفية - Luxury Paper Texture Mode */
+  --background: #1e1b1c;
+  --foreground: #C5A059;
+  --card: #252526;
+  --card-foreground: #C5A059;
+  --popover: #252526;
+  --popover-foreground: #C5A059;
+  --secondary: #252525;
+  --secondary-foreground: #B89447;
+  --muted: #333333;
+  --muted-foreground: #C5A059;
+  --accent: #C5A059;
+  --accent-foreground: #1e1b1c;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: #252525;
+  --input: #252526;
+  --ring: #C5A059;
+  --sidebar: #1e1b1c;
+  --sidebar-foreground: #C5A059;
+  --sidebar-accent: #C5A059;
+  --sidebar-accent-foreground: #1e1b1c;
+  --sidebar-border: #252525;
+  --sidebar-ring: #C5A059;
+}
+
+.dark {
+  /* الألوان الذهبية المطفية الملكية - Boulevard Sanaa Matte Gold Colors */
+  --primary: #C5A059;
+  --primary-foreground: #1e1b1c;
+  --sidebar-primary: #C5A059;
+  --sidebar-primary-foreground: #1e1b1c;
+  
+  /* الخلفية ورقية داكنة والنصوص ذهبية مطفية - Luxury Paper Texture Mode */
+  --background: #1e1b1c;
+  --foreground: #C5A059;
+  --card: #252526;
+  --card-foreground: #C5A059;
+  --popover: #252526;
+  --popover-foreground: #C5A059;
+  --secondary: #252525;
+  --secondary-foreground: #B89447;
+  --muted: #333333;
+  --muted-foreground: #C5A059;
+  --accent: #C5A059;
+  --accent-foreground: #1e1b1c;
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: #252525;
+  --input: #252526;
+  --ring: #C5A059;
+  --chart-1: #C5A059;
+  --chart-2: #B89447;
+  --chart-3: #AB8835;
+  --chart-4: #9E7C23;
+  --chart-5: #917011;
+  --sidebar: #1e1b1c;
+  --sidebar-foreground: #C5A059;
+  --sidebar-accent: #C5A059;
+  --sidebar-accent-foreground: #1e1b1c;
+  --sidebar-border: #252525;
+  --sidebar-ring: #C5A059;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    font-family: 'Shams', sans-serif;
+  }
+  
+  html, body {
+    @apply bg-background text-foreground;
+    font-family: 'Shams', sans-serif;
+    /* خامة ورقية داكنة - Paper Texture Background */
+    background-color: #1e1b1c;
+    background-image: 
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.02) 2px, rgba(255,255,255,.02) 4px);
+    background-attachment: fixed;
+  }
+  
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Custom styles for Boulevard Sanaa - Luxury Edition */
+  
+  /* خامة الخلفية الورقية */
+  .paper-texture {
+    background-color: #1e1b1c;
+    background-image: 
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.02) 2px, rgba(255,255,255,.02) 4px);
+  }
+  
+  /* النص الذهبي المطفي */
+  .luxury-text {
+    @apply text-[#C5A059] font-bold;
+  }
+  
+  /* الحدود الذهبية */
+  .luxury-border {
+    @apply border-[#C5A059];
+  }
+  
+  /* التدرج الذهبي المطفي */
+  .gold-gradient {
+    @apply bg-gradient-to-r from-[#C5A059] to-[#B89447];
+  }
+  
+  /* التدرج الأسود الداكن */
+  .dark-gradient {
+    @apply bg-gradient-to-r from-[#1e1b1c] to-[#252526];
+  }
+  
+  /* البطاقات الفاخرة */
+  .luxury-card {
+    @apply bg-[#252526] text-[#C5A059] border border-[#252525];
+  }
+  
+  /* الأزرار الفاخرة */
+  .luxury-button {
+    @apply bg-[#C5A059] text-[#1e1b1c] hover:bg-[#B89447] transition-colors font-bold;
+  }
+  
+  /* الأزرار الثانوية */
+  .luxury-button-secondary {
+    @apply bg-[#252525] text-[#C5A059] hover:bg-[#333333] border border-[#C5A059] transition-colors;
+  }
+
+  .cream {
+    @apply bg-yellow-50;
+  }
+}
