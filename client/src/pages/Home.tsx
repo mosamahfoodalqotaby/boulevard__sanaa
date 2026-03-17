@@ -48,7 +48,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#1e1b1c] text-[#C5A059]">
       <Sidebar />
-      <WhatsAppButton phoneNumber="967123456789" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
+      <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
       {/* Main Content */}
       <main className="md:ml-64 pb-24">
@@ -146,59 +146,6 @@ export default function Home() {
                       <p className="text-sm font-semibold">صورة فاخرة من بوليفارد صنعاء</p>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Packages Section */}
-        <section className="py-20 px-4 md:px-8 bg-[#252526]">
-          <div className="container mx-auto max-w-6xl">
-            <h2 className="text-4xl font-bold text-center text-[#C5A059] mb-16">
-              الباقات المتاحة
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  name: 'الشاليه الفاخر',
-                  price: '500,000',
-                  features: ['غرف فاخرة', 'مسبح خاص', 'حديقة واسعة', 'خدمة غرف'],
-                },
-                {
-                  name: 'القاعة الملكية',
-                  price: '750,000',
-                  features: ['سعة 500 شخص', 'ديكور فاخر', 'مطبخ متكامل', 'صوتيات احترافية'],
-                },
-                {
-                  name: 'الباقة الكاملة',
-                  price: '1,000,000',
-                  features: ['شاليه + قاعة', 'خدمات متكاملة', 'تنسيق كامل', 'دعم فني'],
-                },
-              ].map((pkg, idx) => (
-                <div
-                  key={idx}
-                  className="p-8 rounded-xl bg-[#252525] border-2 border-yellow-600/40 hover:border-[#6b5a4a] transition-all duration-300 hover:shadow-lg hover:shadow-yellow-600/20"
-                >
-                  <h3 className="text-2xl font-bold text-[#C5A059] mb-4">
-                    {pkg.name}
-                  </h3>
-                  <div className="text-3xl font-bold text-[#b89447] mb-6">
-                    {pkg.price} <span className="text-lg text-[#C5A059]">ريال</span>
-                  </div>
-                  <ul className="space-y-3 mb-8">
-                    {pkg.features.map((feature, fidx) => (
-                      <li key={fidx} className="flex items-center gap-3 text-[#b89447]">
-                        <span className="w-2 h-2 bg-[#3d2e24]0 rounded-full"></span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href="/bookings">
-                    <button className="w-full py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-[#6b5a4a] hover:to-yellow-700 text-[#1e1b1c] font-bold rounded-lg transition-all duration-300">
-                      احجز الآن
-                    </button>
-                  </Link>
                 </div>
               ))}
             </div>
