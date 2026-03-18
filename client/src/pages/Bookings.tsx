@@ -72,19 +72,20 @@ export default function Bookings() {
                 <p className="text-[#C5A059]">ابدأ بإضافة حجز جديد لعرضه هنا</p>
               </div>
             ) : (
-              <div className="space-y-4">
-                {bookings.map((booking) => (
+                <div className="space-y-4" dir="rtl">
+                  {bookings.map((booking) => (
                   <div
                     key={booking.id}
                     className="bg-[#252526] rounded-lg p-6 border border-[#C5A059]/20 hover:border-[#C5A059]/40 transition-colors"
                   >
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h3 className="text-xl font-semibold text-[#C5A059] mb-2">{booking.name}</h3>
-                        <p className="text-[#C5A059]">
-                          تاريخ الحجز: {new Date(booking.checkInDate).toLocaleDateString('ar-SA')}
-                        </p>
-                      </div>
+                     <div className="flex flex-row-reverse justify-between items-start mb-4">                      <div>
+  <h3 className="text-xl font-semibold text-[#C5A059] mb-2 text-right">
+    {booking.name}
+  </h3>
+  <p className="text-[#C5A059] text-right">
+    تاريخ الحجز: {new Date(booking.checkInDate).toLocaleDateString('ar-SA')}
+  </p>
+</div>
                     </div>
                     
                   </div>
