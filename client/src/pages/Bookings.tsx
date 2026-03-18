@@ -43,7 +43,7 @@ export default function Bookings() {
   return (
     <div className="min-h-screen bg-[#1e1b1c] text-[#C5A059]">
       <Sidebar />
-      <WhatsAppButton phoneNumber="967123456789" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
+      <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
       <main className="md:ml-64 pb-24">
         {/* Hero Section */}
@@ -86,14 +86,7 @@ export default function Bookings() {
                         </p>
                       </div>
                     </div>
-                    <div className="border-t border-[#C5A059]/20 my-4"></div>
-                    <button
-                      onClick={() => handlePrintPDF(booking)}
-                      className="flex items-center gap-2 bg-[#C5A059]/20 hover:bg-[#C5A059]/30 border border-[#C5A059]/50 text-[#C5A059] px-4 py-2 rounded-lg transition-all text-sm font-semibold"
-                    >
-                      <Printer className="w-4 h-4" />
-                      طباعة PDF
-                    </button>
+                    
                   </div>
                 ))}
               </div>
