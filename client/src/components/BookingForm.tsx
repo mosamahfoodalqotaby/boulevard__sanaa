@@ -93,14 +93,14 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg border border-yellow-600/20 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-[#1e1b1c] from-slate-800 to-slate-900 rounded-lg border border-yellow-600/20 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-[#1e1b1c] p-6 flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-white">إضافة حجز جديد</h2>
+          <h2 className="text-2xl font-bold text-[#C5A059]">إضافة حجز جديد</h2>
           <button
             onClick={onClose}
-            className="text-white hover:bg-[#252525] p-2 rounded-lg transition-all"
+            className="text-[#C5A059] hover:bg-[#252525] p-2 rounded-lg transition-all"
           >
             <X className="w-6 h-6" />
           </button>
@@ -111,25 +111,25 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
           {/* الاسم والهاتف */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-white font-semibold mb-2">الاسم *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">الاسم *</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
                 placeholder="أدخل اسم العميل"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#C5A059]"
               />
             </div>
             <div>
-              <label className="block text-white font-semibold mb-2">الهاتف *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">الهاتف *</label>
               <input
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="أدخل رقم الهاتف"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
           </div>
@@ -137,12 +137,12 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
           {/* نوع الخدمة وعدد الضيوف */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-white font-semibold mb-2">نوع الخدمة *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">نوع الخدمة *</label>
               <select
                 name="serviceType"
                 value={formData.serviceType}
                 onChange={handleInputChange}
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] focus:outline-none focus:border-[#6b5a4a]"
               >
                 <option value="chalet">شاليه فاخر</option>
                 <option value="hall">قاعة احتفالات</option>
@@ -150,14 +150,14 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
               </select>
             </div>
             <div>
-              <label className="block text-white font-semibold mb-2">عدد الضيوف *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">عدد الضيوف *</label>
               <input
                 type="number"
                 name="guestCount"
                 value={formData.guestCount}
                 onChange={handleInputChange}
                 min="1"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
           </div>
@@ -165,25 +165,25 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
           {/* التواريخ */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-white font-semibold mb-2">تاريخ الوصول *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">تاريخ الوصول *</label>
               <input
                 type="date"
                 name="checkInDate"
                 value={formData.checkInDate}
                 onChange={handleInputChange}
                 min={new Date().toISOString().split('T')[0]}
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
             <div>
-              <label className="block text-white font-semibold mb-2">تاريخ المناسبة *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">تاريخ المناسبة *</label>
               <input
                 type="date"
                 name="eventDate"
                 value={formData.eventDate}
                 onChange={handleInputChange}
                 min={formData.checkInDate || new Date().toISOString().split('T')[0]}
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
           </div>
@@ -191,62 +191,51 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
           {/* المبالغ */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-white font-semibold mb-2">المبلغ الكلي *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">المبلغ الكلي *</label>
               <input
                 type="text"
                 name="totalPrice"
                 value={formData.totalPrice}
                 onChange={handleInputChange}
                 placeholder="مثال: 5000 ريال"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
             <div>
-              <label className="block text-white font-semibold mb-2">المبلغ المدفوع *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">المبلغ المدفوع *</label>
               <input
                 type="text"
                 name="paidAmount"
                 value={formData.paidAmount}
                 onChange={handleInputChange}
                 placeholder="مثال: 2500 ريال"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
             <div>
-              <label className="block text-white font-semibold mb-2">المبلغ المتبقي *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">المبلغ المتبقي *</label>
               <input
                 type="text"
                 name="remainingAmount"
                 value={formData.remainingAmount}
                 onChange={handleInputChange}
                 placeholder="مثال: 2500 ريال"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
           </div>
 
-          {/* الملاحظات والتفاصيل */}
-          <div>
-            <label className="block text-white font-semibold mb-2">ملاحظات خاصة</label>
-            <textarea
-              name="specialRequests"
-              value={formData.specialRequests}
-              onChange={handleInputChange}
-              placeholder="أدخل أي ملاحظات خاصة"
-              rows={3}
-              className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
-            />
-          </div>
+     
 
           <div>
-            <label className="block text-white font-semibold mb-2">تفاصيل إضافية</label>
+            <label className="block text-[#C5A059] font-semibold mb-2">تفاصيل إضافية</label>
             <textarea
               name="additionalDetails"
               value={formData.additionalDetails}
               onChange={handleInputChange}
               placeholder="أدخل أي تفاصيل إضافية"
               rows={3}
-              className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+              className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
             />
           </div>
 
@@ -260,7 +249,7 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
               onChange={handleInputChange}
               className="w-5 h-5 accent-yellow-500 cursor-pointer"
             />
-            <label htmlFor="generateQRCode" className="text-white font-semibold cursor-pointer">
+            <label htmlFor="generateQRCode" className="text-[#C5A059] font-semibold cursor-pointer">
               توليد QR Code للحجز
             </label>
           </div>
@@ -278,14 +267,14 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-[#6b5a4a] hover:bg-[#252525] disabled:bg-slate-600 text-white font-semibold py-3 rounded-lg transition-all"
+              className="flex-1 bg-[#6b5a4a] hover:bg-[#252525] disabled:bg-slate-600 text-[#C5A059] font-semibold py-3 rounded-lg transition-all"
             >
               {loading ? 'جاري الحفظ...' : 'حفظ الحجز'}
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-[#1e1b1c] hover:bg-slate-600 text-white font-semibold py-3 rounded-lg transition-all"
+              className="flex-1 bg-[#1e1b1c] hover:bg-slate-600 text-[#C5A059] font-semibold py-3 rounded-lg transition-all"
             >
               إلغاء
             </button>

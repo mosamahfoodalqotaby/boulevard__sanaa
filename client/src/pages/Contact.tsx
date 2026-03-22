@@ -14,7 +14,7 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-[#1e1b1c]">
       <Sidebar />
-      <WhatsAppButton phoneNumber="967123456789" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
+      <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
       <main className="md:ml-64 pb-24">
         {/* Header */}
@@ -23,8 +23,8 @@ export default function Contact() {
             <div className="flex justify-center mb-6">
               <img src="/logo.png" alt="بوليفارد صنعاء" className="h-36 w-auto drop-shadow-lg" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">تواصل معنا</h1>
-            <p className="text-xl text-yellow-50">
+            <h1 className="text-5xl md:text-[#C5A059] font-bold mb-4">تواصل معنا</h1>
+            <p className="text-xl text-[#C5A059]">
               نحن هنا للإجابة على جميع استفساراتك
             </p>
           </div>
@@ -40,8 +40,8 @@ export default function Contact() {
                   <Phone className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-[#C5A059] mb-2">الهاتف</h3>
-                <p className="text-gray-300 dir-ltr">+967 1 234 5678</p>
-                <p className="text-gray-400 text-sm mt-1">متاح 24/7</p>
+                <p className="text-[#C5A059] dir-ltr">+967784442228</p>
+                <p className="text-[#C5A059] text-sm mt-1">متاح 24/7</p>
               </div>
 
               {/* Email */}
@@ -50,8 +50,8 @@ export default function Contact() {
                   <Mail className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-[#C5A059] mb-2">البريد الإلكتروني</h3>
-                <p className="text-gray-300 dir-ltr">info@boulevard-sanaa.com</p>
-                <p className="text-gray-400 text-sm mt-1">نرد خلال 24 ساعة</p>
+                <p className="text-[#C5A059] dir-ltr">zaidmotahr@gmail.com</p>
+                <p className="text-[#C5A059] text-sm mt-1">نرد خلال 24 ساعة</p>
               </div>
 
               {/* Location */}
@@ -60,8 +60,8 @@ export default function Contact() {
                   <MapPin className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-[#C5A059] mb-2">الموقع</h3>
-                <p className="text-gray-300">صنعاء - اليمن</p>
-                <p className="text-gray-400 text-sm mt-1">الحي الراقي</p>
+                <p className="text-[#C5A059]">صنعاء - اليمن</p>
+                <p className="text-[#C5A059] text-sm mt-1">الحي الراقي</p>
               </div>
             </div>
           </div>
@@ -89,70 +89,6 @@ export default function Contact() {
                   </a>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Form */}
-        <section className="py-12 px-4 md:px-8">
-          <div className="container mx-auto max-w-2xl">
-            <h2 className="text-3xl font-bold text-[#C5A059] mb-8 text-center">
-              أرسل لنا رسالة
-            </h2>
-            <div className="bg-[#1e1b1c] rounded-xl p-8 shadow-2xl border border-yellow-600/30">
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-[#C5A059] mb-2">
-                      الاسم
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="أدخل اسمك"
-                      className="w-full px-4 py-3 border border-yellow-600/50 rounded-lg bg-[#1e1b1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-[#C5A059] mb-2">
-                      البريد الإلكتروني
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="أدخل بريدك"
-                      className="w-full px-4 py-3 border border-yellow-600/50 rounded-lg bg-[#1e1b1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-[#C5A059] mb-2">
-                    الموضوع
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="موضوع الرسالة"
-                    className="w-full px-4 py-3 border border-yellow-600/50 rounded-lg bg-[#1e1b1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-[#C5A059] mb-2">
-                    الرسالة
-                  </label>
-                  <textarea
-                    placeholder="أدخل رسالتك هنا..."
-                    rows={6}
-                    className="w-full px-4 py-3 border border-yellow-600/50 rounded-lg bg-[#1e1b1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-[#1e1b1c] hover:from-yellow-700 hover:to-yellow-600 text-slate-900 font-bold rounded-lg transition-all duration-300 active:scale-95 shadow-lg"
-                >
-                  أرسل الرسالة
-                </button>
-              </form>
             </div>
           </div>
         </section>

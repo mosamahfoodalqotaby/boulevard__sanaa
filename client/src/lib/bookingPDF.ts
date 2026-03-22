@@ -86,75 +86,95 @@ export async function printBookingPDF(booking: Booking) {
           ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:180px;height:180px;object-fit:contain;display:inline-block;" />` : ''}
         </div>
         
-        <!-- خط فاصل زخرفي -->
-        <div style="border-bottom:1px dashed rgba(197,160,89,0.5);margin:10px 0 25px 0;"></div>
-
         <!-- جدول البيانات الرئيسي -->
         <table style="width:100%;border-collapse:collapse;margin-bottom:20px;font-size:13px;direction:rtl;">
           <!-- صف 1: الاسم والمحترم -->
           <tr>
-            <td style="text-align:right;width:20%;color:#C5A059;font-weight:bold;padding:0 0 8px 0;border:none;">الاسم/</td>
-            <td style="text-align:center;border-bottom:1px dashed rgba(197,160,89,0.4);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;flex:1;">${booking.name || ""}</td>
-            <td style="text-align:left;width:20%;color:#d4a574;padding:0 0 8px 0;border:none;">المحترم</td>
+            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">الاسم/</td>
+            <td style="text-align:center;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;flex:1;">${booking.name || ""}</td>
+            <td style="text-align:left;width:20%;color:#E6C97A;padding:0 0 8px 0;border:none;">المحترم</td>
           </tr>
      <tr>
-  <td style="text-align:right;width:15%;color:#C5A059;font-weight:bold;padding:0 0 8px 0;border:none;">
+  <td style="text-align:right;width:15%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">
     تاريخ الحجز/
   </td>
 
-  <td style="text-align:center;width:35%;border-bottom:1px dashed rgba(197,160,89,0.4);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">
+  <td style="text-align:center;width:35%;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">
     ${booking.checkInDate || ""}
   </td>
 
-  <td style="text-align:right;width:15%;color:#C5A059;font-weight:bold;padding:0 0 8px 0;border:none;">
+  <td style="text-align:right;width:15%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">
     تاريخ المناسبة/
   </td>
 
-  <td style="text-align:center;width:35%;border-bottom:1px dashed rgba(197,160,89,0.4);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">
+  <td style="text-align:center;width:35%;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">
     ${booking.eventDate || ""}
   </td>
 </tr>
           <!-- صف 4: المبلغ المدفوع -->
           <tr>
-            <td style="text-align:right;width:20%;color:#C5A059;font-weight:bold;padding:0 0 8px 0;border:none;">المبلغ المدفوع/</td>
-            <td style="text-align:center;border-bottom:1px dashed rgba(197,160,89,0.4);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">${booking.paidAmount || "0"} ريال</td>
+            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">المبلغ المدفوع/</td>
+            <td style="text-align:center;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">${booking.paidAmount || "0"} ريال</td>
             <td style="text-align:left;width:20%;padding:0 0 8px 0;border:none;"></td>
           </tr>
 
           <!-- صف 5: المبلغ المتبقي -->
           <tr>
-            <td style="text-align:right;width:20%;color:#C5A059;font-weight:bold;padding:0 0 8px 0;border:none;">المبلغ المتبقي/</td>
-            <td style="text-align:center;border-bottom:1px dashed rgba(197,160,89,0.4);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">${booking.remainingAmount || "0"} ريال</td>
+            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">المبلغ المتبقي/</td>
+            <td style="text-align:center;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">${booking.remainingAmount || "0"} ريال</td>
             <td style="text-align:left;width:20%;padding:0 0 8px 0;border:none;"></td>
           </tr>
 
           <!-- صف 6: تفاصيل اضافية -->
           <tr>
-            <td style="text-align:right;width:20%;color:#C5A059;font-weight:bold;padding:0 0 8px 0;border:none;">تفاصيل اضافية/</td>
-            <td style="text-align:center;border-bottom:1px dashed rgba(197,160,89,0.4);padding:0 10px 8px 10px;color:#d4a574;word-break:break-word;max-width:300px;">${booking.additionalDetails || booking.specialRequests || ""}</td>
+            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">تفاصيل اضافية/</td>
+            <td style="text-align:center;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;word-break:break-word;max-width:300px;">${booking.additionalDetails || booking.specialRequests || ""}</td>
             <td style="text-align:left;width:20%;padding:0 0 8px 0;border:none;"></td>
           </tr>
         </table>
 
         <!-- خط فاصل زخرفي -->
-        <div style="border-bottom:1px dashed rgba(197,160,89,0.5);margin:15px 0 20px 0;"></div>
+        <div style="border-bottom:2px solid rgba(240, 201, 129, 0.8);margin:10px 0 25px 0;"></div>
+       <!-- شروط وأحكام الحجز -->
+<div style="margin-bottom:20px;">
+  <div style="font-size:16px;font-weight:700;color:#E6C97A;margin-bottom:14px;text-align:center;font-family:${fontFamily};">
+    شروط وأحكام الحجز
+  </div>
 
-        <!-- شروط وأحكام الحجز -->
-        <div style="margin-bottom:20px;">
-          <div style="font-size:14px;font-weight:bold;color:#C5A059;margin-bottom:12px;text-align:center;font-family:${fontFamily};">شروط وأحكام الحجز</div>
-          <ul style="font-size:14px;color:#9d8b6f;line-height:2;text-align:right;direction:rtl;padding-right:20px;margin:0;">
-            <li style="margin-bottom:10px;"><strong style="color:#C5A059;">تأكيد الحجز:</strong> يعد العربون تأكيداً نهائياً للحجز لضمان حصرية المرفق لكم في التاريخ المحدد، ولا يسترد إلا في حال وجود بديل. لضمان استمرارية تشغيل المرفق وفق أعلى المعايير.</li>
-            <li style="margin-bottom:10px;"><strong style="color:#C5A059;">اكتمال الإجراءات:</strong> لضمان تجربة متكاملة بلا انقطاع، يرجى سداد كامل مبلغ الحجز وتأمين السلامة قبل موعد الدخول.</li>
-            <li style="margin-bottom:10px;"><strong style="color:#C5A059;">سلامة المرفق:</strong> يعد الضيف مسؤولاً عن سلامة وتجهيزات المرفق (الأثاث، المسبح، المساحات الخضراء). ويتم تغطية أي تلفيات ناتجة عن سوء الاستخدام، مع الالتزام بسداد الفارق إن وجد.</li>
-            <li style="margin-bottom:10px;"><strong style="color:#C5A059;">الهوية والخصوصية:</strong> حرصاً على أمن وخصوصية جميع ضيوفنا، يرجى إبراز الهوية الشخصية عند الدخول، وتسليم قائمة بأسماء الضيوف مسبقاً. مع العلم أن أي عدد إضافي يتجاوز السعة المقررة يخضع لرسوم إضافية بقيمة (4000 ريال) للفرد.</li>
-            <li style="margin-bottom:10px;"><strong style="color:#C5A059;">بروتوكول الصوت:</strong> لضمان سكينة المنطقة وخصوصية الجيران، يسمح باستخدام نظام صوتي محدد (سماعتين فقط)، وتقفل السماعات الخارجية عند الساعة 9:00 مساءً لمناسبات النساء و12:00 ليلاً لمناسبات الرجال، مع الالتزام بوضع السماعات في الأماكن المخصصة.</li>
-            <li style="margin-bottom:10px;"><strong style="color:#C5A059;">ميثاق السكينة (الممنوعات):</strong> يمنع منعاً باتاً استخدام الأسلحة النارية، أو (الفشفيش). كما يمنع تثبيت أي زينة قد تترك أثراً على الجدران أو التجهيزات، حفاظاً على جمالية المرفق لضيوفنا القادمين.</li>
-            <li style="margin-bottom:10px;"><strong style="color:#C5A059;">إخلاء المسؤولية:</strong> تخلي إدارة "بوليفارد صنعاء" مسؤوليتها عن فقدان المقتنيات الشخصية أو أي إصابات ناتجة عن حوادث المسبح أو سوء التصرف داخل القاعة.</li>
-          </ul>
-        </div>
+  <ul style="font-size:14px;color:#E6C97A;line-height:2.2;text-align:right;direction:rtl;padding-right:20px;margin:0;font-weight:600;font-family:${fontFamily};">
+    
+    <li style="margin-bottom:12px;">
+      <strong>تأكيد الحجز:</strong> يعد العربون تأكيداً نهائياً للحجز لضمان حصرية المرفق لكم في التاريخ المحدد، ولا يسترد إلا في حال وجود بديل. لضمان استمرارية تشغيل المرفق وفق أعلى المعايير.
+    </li>
 
+    <li style="margin-bottom:12px;">
+      <strong>اكتمال الإجراءات:</strong> لضمان تجربة متكاملة بلا انقطاع، يرجى سداد كامل مبلغ الحجز وتأمين السلامة قبل موعد الدخول.
+    </li>
+
+    <li style="margin-bottom:12px;">
+      <strong>سلامة المرفق:</strong> يعد الضيف مسؤولاً عن سلامة وتجهيزات المرفق (الأثاث، المسبح، المساحات الخضراء). ويتم تغطية أي تلفيات ناتجة عن سوء الاستخدام، مع الالتزام بسداد الفارق إن وجد.
+    </li>
+
+    <li style="margin-bottom:12px;">
+      <strong>الهوية والخصوصية:</strong> حرصاً على أمن وخصوصية جميع ضيوفنا، يرجى إبراز الهوية الشخصية عند الدخول، وتسليم قائمة بأسماء الضيوف مسبقاً. مع العلم أن أي عدد إضافي يتجاوز السعة المقررة يخضع لرسوم إضافية بقيمة (4000 ريال) للفرد.
+    </li>
+
+    <li style="margin-bottom:12px;">
+      <strong>بروتوكول الصوت:</strong> لضمان سكينة المنطقة وخصوصية الجيران، يسمح باستخدام نظام صوتي محدد (سماعتين فقط)، وتقفل السماعات الخارجية عند الساعة 9:00 مساءً لمناسبات النساء و12:00 ليلاً لمناسبات الرجال، مع الالتزام بوضع السماعات في الأماكن المخصصة.
+    </li>
+
+    <li style="margin-bottom:12px;">
+      <strong>ميثاق السكينة (الممنوعات):</strong> يمنع منعاً باتاً استخدام الأسلحة النارية، أو (الفشفيش). كما يمنع تثبيت أي زينة قد تترك أثراً على الجدران أو التجهيزات، حفاظاً على جمالية المرفق لضيوفنا القادمين.
+    </li>
+
+    <li style="margin-bottom:12px;">
+      <strong>إخلاء المسؤولية:</strong> تخلي إدارة "بوليفارد صنعاء" مسؤوليتها عن فقدان المقتنيات الشخصية أو أي إصابات ناتجة عن حوادث المسبح أو سوء التصرف داخل القاعة.
+    </li>
+
+  </ul>
+</div>
         <!-- التذييل -->
-        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:9px;color:#C5A059;border-top:1px solid rgba(197,160,89,0.3);padding-top:8px;">Boulevard Sana'a | بوليفارد صنعاء</div>
+        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:9px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:8px;">Boulevard Sana'a | بوليفارد صنعاء</div>
       </div>
     `;
 
@@ -167,27 +187,27 @@ export async function printBookingPDF(booking: Booking) {
         </div>
         <!-- خط زخرفي -->
         <div style="display:flex;align-items:center;width:70%;margin:10px 0 20px 0;">
-          <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,#C5A059);"></div>
-          <div style="margin:0 12px;font-size:10px;color:#C5A059;">&#9830;</div>
-          <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,#C5A059);"></div>
+          <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,#E6C97A);"></div>
+          <div style="margin:0 12px;font-size:10px;color:#E6C97A;">&#9830;</div>
+          <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,#E6C97A);"></div>
         </div>
         <!-- عنوان QR Code -->
-        <div style="font-size:16px;font-weight:bold;color:#C5A059;text-align:center;margin-bottom:20px;font-family:${fontFamily};">رمز الاستجابة السريعة للحجز</div>
+        <div style="font-size:16px;font-weight:bold;color:#E6C97A;text-align:center;margin-bottom:20px;font-family:${fontFamily};">رمز الاستجابة السريعة للحجز</div>
         <!-- QR Code -->
-        <div style="border:3px solid #C5A059;padding:15px;background:#1e1b1c;display:inline-flex;align-items:center;justify-content:center;">
+        <div style="border:3px solid #E6C97A;padding:15px;background:#1e1b1c;display:inline-flex;align-items:center;justify-content:center;">
           <div style="background:white;padding:10px;display:inline-flex;align-items:center;justify-content:center;">
             <img src="${qrCodeImage}" alt="QR Code" style="width:240px;height:240px;display:block;" />
           </div>
         </div>
         <!-- معلومات الحجز -->
-        <div style="text-align:center;margin-top:22px;font-size:11px;color:#C5A059;">
+        <div style="text-align:center;margin-top:22px;font-size:11px;color:#E6C97A;">
           ${booking.id ? `<div style="margin-bottom:6px;"><span style="font-weight:bold;">رقم الحجز:</span> ${booking.id}</div>` : ''}
           ${booking.name ? `<div style="margin-bottom:6px;"><span style="font-weight:bold;">اسم الضيف:</span> ${booking.name}</div>` : ''}
           ${booking.checkInDate ? `<div style="margin-bottom:6px;"><span style="font-weight:bold;">تاريخ الحجز:</span> ${booking.checkInDate}</div>` : ''}
         </div>
-        <div style="text-align:center;margin-top:18px;font-size:9px;color:#C5A059;max-width:80%;">امسح رمز الاستجابة السريعة للوصول إلى تفاصيل حجزك والاستمتاع بالامتيازات الحصرية</div>
+        <div style="text-align:center;margin-top:18px;font-size:9px;color:#E6C97A;max-width:80%;">امسح رمز الاستجابة السريعة للوصول إلى تفاصيل حجزك والاستمتاع بالامتيازات الحصرية</div>
         <!-- التذييل -->
-        <div style="position:absolute;bottom:15mm;left:20mm;right:20mm;text-align:center;font-size:8px;color:#C5A059;border-top:1px solid rgba(197,160,89,0.3);padding-top:6px;">Boulevard Sana'a | بوليفارد صنعاء</div>
+        <div style="position:absolute;bottom:15mm;left:20mm;right:20mm;text-align:center;font-size:8px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:6px;">Boulevard Sana'a | بوليفارد صنعاء</div>
       </div>
     ` : '';
 
@@ -197,7 +217,7 @@ export async function printBookingPDF(booking: Booking) {
         <style>
           ${fontFaceCSS}
           body { font-family: ${fontFamily}; }
-          strong { color: #C5A059; }
+          strong { color: #E6C97A; }
           ul { list-style-position: inside; }
           li { text-align: right; }
         </style>

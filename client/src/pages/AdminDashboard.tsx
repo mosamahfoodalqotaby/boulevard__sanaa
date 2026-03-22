@@ -215,7 +215,7 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-[#1e1b1c]">
       <Sidebar />
-      <WhatsAppButton phoneNumber="967123456789" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
+      <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
       <main className="md:ml-64 pb-24">
         {/* Hero Section */}
@@ -226,12 +226,12 @@ export default function AdminDashboard() {
             </div>
             <div className="flex justify-between items-center">
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">لوحة التحكم الإدارية</h1>
-                <p className="text-yellow-100 text-lg">مرحباً {currentUser?.name}</p>
+                <h1 className="text-4xl md:text-5xl font-bold text-[#C5A059] mb-4">لوحة التحكم الإدارية</h1>
+                <p className="text-[#C5A059] text-lg">مرحباً {currentUser?.name}</p>
               </div>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all font-semibold"
+                className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-[#C5A059] px-6 py-3 rounded-lg transition-all font-semibold"
               >
                 <LogOut className="w-5 h-5" />
                 تسجيل الخروج
@@ -291,7 +291,7 @@ export default function AdminDashboard() {
                 <div className="mb-8">
                   <button
                     onClick={() => setShowBookingForm(true)}
-                    className="flex items-center gap-2 bg-[#6b5a4a] hover:bg-[#252525] text-white px-6 py-3 rounded-lg transition-all font-semibold"
+                    className="flex items-center gap-2 bg-[#6b5a4a] hover:bg-[#252525] text-[#C5A059] px-6 py-3 rounded-lg transition-all font-semibold"
                   >
                     <Plus className="w-5 h-5" />
                     إضافة حجز جديد
