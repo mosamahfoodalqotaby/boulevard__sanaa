@@ -66,14 +66,14 @@ export default function Sidebar() {
             <Phone className="text-[#C5A059] flex-shrink-0 mt-1" size={20} />
             <div className="text-sm">
               <p className="font-semibold text-[#C5A059]">الهاتف</p>
-              <p className="text-[#C5A059]/80 dir-ltr">+967 1 234 5678</p>
+              <p className="text-[#C5A059]/80 dir-ltr">+967784442228</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <Mail className="text-[#C5A059] flex-shrink-0 mt-1" size={20} />
             <div className="text-sm">
               <p className="font-semibold text-[#C5A059]">البريد</p>
-              <p className="text-[#C5A059]/80 dir-ltr">info@boulevard.com</p>
+              <p className="text-[#C5A059]/80 dir-ltr">zaidmotaher@gmail.com</p>
             </div>
           </div>
         </div>

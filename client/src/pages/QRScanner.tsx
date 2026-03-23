@@ -60,7 +60,7 @@ export default function QRScanner() {
   return (
     <div className="min-h-screen bg-[#1e1b1c] text-[#C5A059]">
       <Sidebar />
-      <WhatsAppButton phoneNumber="967123456789" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
+      <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
       <main className="md:ml-64 pb-24">
         {/* Header with Logo */}
@@ -202,7 +202,7 @@ export default function QRScanner() {
               </div>
               <div className="bg-[#3d2e24] rounded-xl p-6 shadow-lg border border-[#C5A059]/30 text-center">
                 <p className="text-[#C5A059] font-bold mb-2">الهاتف</p>
-                <p className="text-[#C5A059]">+967 1 234 5678</p>
+                <p className="text-[#C5A059]">+967784442228</p>
               </div>
             </div>
           </div>

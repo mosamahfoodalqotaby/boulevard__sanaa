@@ -34,7 +34,7 @@ export default function QRWelcome() {
   return (
     <div className="min-h-screen bg-[#1e1b1c] text-[#C5A059]">
       <Sidebar />
-      <WhatsAppButton phoneNumber="967123456789" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
+      <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
       <main className="md:ml-64 pb-24">
         {/* Welcome Section */}
@@ -127,11 +127,11 @@ export default function QRWelcome() {
                     <div className="space-y-3 text-[#b89447]">
                       <div className="flex items-center gap-2">
                         <Phone className="w-5 h-5 text-[#b89447]" />
-                        <span>+967 1 234 5678</span>
+                        <span>+967784442228</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Mail className="w-5 h-5 text-[#b89447]" />
-                        <span>info@boulevard.com</span>
+                        <span>zaidmotahr@gmail.com</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-5 h-5 text-[#b89447]" />
@@ -179,7 +179,7 @@ export default function QRWelcome() {
               تواصل معنا الآن واحصل على أفضل العروض الحصرية
             </p>
             <a
-              href="https://wa.me/967123456789?text=مرحبا%20بي%20في%20بوليفارد%20صنعاء%20أود%20الحجز"
+              href="https://wa.me/967784442228?text=مرحبا%20بي%20في%20بوليفارد%20صنعاء%20أود%20الحجز"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-12 py-4 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-[#6b5a4a] hover:to-yellow-700 text-[#1e1b1c] font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"

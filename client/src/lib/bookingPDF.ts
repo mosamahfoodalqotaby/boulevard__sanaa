@@ -87,7 +87,7 @@ export async function printBookingPDF(booking: Booking) {
         </div>
         
         <!-- جدول البيانات الرئيسي -->
-        <table style="width:100%;border-collapse:collapse;margin-bottom:20px;font-size:13px;direction:rtl;">
+        <table style="width:100%;border-collapse:collapse;margin-bottom:20px;font-size:16px;direction:rtl;">
           <!-- صف 1: الاسم والمحترم -->
           <tr>
             <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">الاسم/</td>

@@ -128,125 +128,6 @@ export default function QRCodeScanner() {
     setShowForm(true);
   };
 
-  // صفحة النموذج
-  if (showForm && scanResult) {
-    return (
-      <div className="min-h-screen bg-[#1e1b1c] p-4" dir="rtl">
-        <div className="max-w-2xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8 pt-8">
-            <div className="flex justify-center mb-4">
-              <img src="/logo-gold.png" alt="Boulevard Sana'a" className="h-32 w-auto drop-shadow-lg" />
-            </div>
-            <h1 className="text-4xl font-bold text-[#C5A059] mb-2" style={{ fontFamily: 'Amiri, serif' }}>
-              بوليفارد صنعاء
-            </h1>
-            <p className="text-[#C5A059] text-lg" style={{ fontFamily: 'Amiri, serif' }}>
-              Boulevard Sana'a
-            </p>
-          </div>
-
-          {/* Form Title */}
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-[#C5A059] mb-2" style={{ fontFamily: 'Amiri, serif' }}>
-              معلومات إضافية
-            </h2>
-            <p className="text-[#a89968] text-lg" style={{ fontFamily: 'Amiri, serif' }}>
-              يرجى ملء البيانات التالية لتحسين تجربتك
-            </p>
-          </div>
-
-          {/* Form */}
-          <form onSubmit={handleFormSubmit} className="bg-[#252526] border border-[#C5A059]/30 rounded-lg p-8 mb-8">
-            {/* Guest Count */}
-            <div className="mb-6">
-              <label className="block text-[#C5A059] font-bold mb-2 text-right" style={{ fontFamily: 'Amiri, serif' }}>
-                عدد الضيوف المتوقع
-              </label>
-              <input
-                type="number"
-                name="guestCount"
-                value={formData.guestCount}
-                onChange={handleFormChange}
-                placeholder="أدخل عدد الضيوف"
-                className="w-full bg-[#1e1b1c] border border-[#C5A059] rounded px-4 py-2 text-[#C5A059] text-right placeholder-[#a89968]"
-                style={{ fontFamily: 'Amiri, serif' }}
-              />
-            </div>
-
-            {/* Special Requests */}
-            <div className="mb-6">
-              <label className="block text-[#C5A059] font-bold mb-2 text-right" style={{ fontFamily: 'Amiri, serif' }}>
-                طلبات خاصة
-              </label>
-              <textarea
-                name="specialRequests"
-                value={formData.specialRequests}
-                onChange={handleFormChange}
-                placeholder="أخبرنا عن أي طلبات خاصة لديك"
-                rows={3}
-                className="w-full bg-[#1e1b1c] border border-[#C5A059] rounded px-4 py-2 text-[#C5A059] text-right placeholder-[#a89968] resize-none"
-                style={{ fontFamily: 'Amiri, serif' }}
-              />
-            </div>
-
-            {/* Meal Preferences */}
-            <div className="mb-6">
-              <label className="block text-[#C5A059] font-bold mb-2 text-right" style={{ fontFamily: 'Amiri, serif' }}>
-                تفضيلات الطعام
-              </label>
-              <textarea
-                name="mealPreferences"
-                value={formData.mealPreferences}
-                onChange={handleFormChange}
-                placeholder="أخبرنا عن تفضيلاتك الغذائية"
-                rows={3}
-                className="w-full bg-[#1e1b1c] border border-[#C5A059] rounded px-4 py-2 text-[#C5A059] text-right placeholder-[#a89968] resize-none"
-                style={{ fontFamily: 'Amiri, serif' }}
-              />
-            </div>
-
-            {/* Additional Notes */}
-            <div className="mb-6">
-              <label className="block text-[#C5A059] font-bold mb-2 text-right" style={{ fontFamily: 'Amiri, serif' }}>
-                ملاحظات إضافية
-              </label>
-              <textarea
-                name="notes"
-                value={formData.notes}
-                onChange={handleFormChange}
-                placeholder="أي ملاحظات أخرى تود إضافتها"
-                rows={3}
-                className="w-full bg-[#1e1b1c] border border-[#C5A059] rounded px-4 py-2 text-[#C5A059] text-right placeholder-[#a89968] resize-none"
-                style={{ fontFamily: 'Amiri, serif' }}
-              />
-            </div>
-
-            {/* Buttons */}
-            <div className="flex gap-4 justify-center">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="bg-[#C5A059] hover:bg-[#b89447] disabled:bg-[#a89968] text-[#1e1b1c] font-bold py-3 px-8 rounded-lg transition-all"
-                style={{ fontFamily: 'Amiri, serif' }}
-              >
-                {isSubmitting ? 'جاري الحفظ...' : 'حفظ المعلومات'}
-              </button>
-              <button
-                type="button"
-                onClick={resetScan}
-                className="bg-transparent border border-[#C5A059] hover:bg-[#252526] text-[#C5A059] font-bold py-3 px-8 rounded-lg transition-all"
-                style={{ fontFamily: 'Amiri, serif' }}
-              >
-                إلغاء
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
   // صفحة التصفح بـ Scroll Snap
   if (scanResult) {
     return (
@@ -262,20 +143,15 @@ export default function QRCodeScanner() {
           {/* صفحة الترحيب الأولى */}
           <div className="w-full h-screen bg-[#1e1b1c] flex flex-col items-center justify-center p-4 snap-start snap-always">
             {/* Header */}
-            <div className="text-center mb-12">
-              <div className="flex justify-center mb-4">
+            <div className="text-center mb-19">
+              <div className="flex justify-center mb-12">
                 <img src="/logo-gold.png" alt="Boulevard Sana'a" className="h-40 w-auto drop-shadow-lg" />
               </div>
-              <h1 className="text-6xl font-bold text-[#C5A059] mb-2" style={{ fontFamily: 'Amiri, serif' }}>
-                بوليفارد صنعاء
-              </h1>
-              <p className="text-[#C5A059] text-2xl" style={{ fontFamily: 'Amiri, serif' }}>
-                Boulevard Sana'a
-              </p>
+              
             </div>
 
             {/* Customer Name */}
-            <div className="text-center mb-16">
+            <div className="container mx-auto max-w-4xl text-center">
               <h2 className="text-6xl font-bold text-[#C5A059] mb-4" style={{ fontFamily: 'Amiri, serif' }}>
                 أهلاً وسهلاً
               </h2>
