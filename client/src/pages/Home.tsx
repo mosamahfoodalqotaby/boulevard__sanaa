@@ -93,30 +93,7 @@ export default function Home() {
               لماذا تختار بوليفارد؟
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {features.map((feature, idx) => {
-                const Icon = feature.icon;
-                const card = (
-                  <div
-                    key={idx}
-                    className={`p-6 rounded-xl bg-[#252525] border border-yellow-600/30 hover:shadow-lg hover:shadow-yellow-600/20 transition-all duration-300${(feature as any).link ? ' cursor-pointer hover:border-yellow-500/60' : ''}`}
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-[#6b5a4a] text-white flex items-center justify-center mb-4">
-                      <Icon size={24} />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#C5A059] mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-[#C5A059]">
-                      {feature.description}
-                    </p>
-                  </div>
-                );
-                return (feature as any).link ? (
-                  <a key={idx} href={(feature as any).link} target="_blank" rel="noopener noreferrer">
-                    {card}
-                  </a>
-                ) : card;
-              })}
+            
             </div>
           </div>
         </section>
@@ -161,11 +138,11 @@ export default function Home() {
             <p className="text-xl text-[#b89447] mb-8">
               احجز الآن واستمتع بأفضل الخدمات والمرافق الفاخرة
             </p>
-            <Link href="/bookings">
+            {/* <Link href="/bookings">
               <button className="px-12 py-4 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-[#6b5a4a] hover:to-yellow-700 text-[#1e1b1c] font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95">
                 احجز الآن
               </button>
-            </Link>
+            </Link> */}
           </div>
         </section>
       </main>

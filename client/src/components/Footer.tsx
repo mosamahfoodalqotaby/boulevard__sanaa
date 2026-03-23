@@ -21,13 +21,13 @@ export default function Footer() {
         </div>
 
         {/* Right Section - Book Now Button */}
-        <button
+        {/* <button
           onClick={handleWhatsApp}
           className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C5A059] to-[#b89447] hover:from-[#b89447] hover:to-[#a89350] text-[#1e1b1c] font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95"
         >
           <MessageCircle size={20} />
           <span>احجز الآن</span>
-        </button>
+        </button> */}
       </div>
     </footer>
   );
