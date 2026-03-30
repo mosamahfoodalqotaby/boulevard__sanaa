@@ -22,7 +22,9 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
     specialRequests: '',
     additionalDetails: '',
     generateQRCode: false,
+    generateImagePage: false,
   });
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -89,7 +91,9 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
       specialRequests: '',
       additionalDetails: '',
       generateQRCode: false,
+      generateImagePage: false,
     });
+
   };
 
   return (
@@ -254,7 +258,23 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
             </label>
           </div>
 
+          {/* صفحة الصورة الترحيبية */}
+          <div className="flex items-center gap-3 bg-[#1e1b1c]/50 p-4 rounded-lg border border-slate-600">
+            <input
+              type="checkbox"
+              name="generateImagePage"
+              id="generateImagePage"
+              checked={formData.generateImagePage}
+              onChange={handleInputChange}
+              className="w-5 h-5 accent-yellow-500 cursor-pointer"
+            />
+            <label htmlFor="generateImagePage" className="text-[#C5A059] font-semibold cursor-pointer">
+              إضافة صفحة الصورة الترحيبية
+            </label>
+          </div>
+
           {/* رسالة الخطأ */}
+
           {error && (
             <div className="bg-red-900/30 border border-red-600 rounded-lg p-4 mb-4">
               <p className="text-red-300 font-semibold">⚠️ خطأ</p>

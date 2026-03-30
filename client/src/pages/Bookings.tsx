@@ -21,6 +21,7 @@ interface Booking {
   specialRequests?: string;
   additionalDetails?: string;
   generateQRCode?: boolean;
+  generateImagePage?: boolean;
   createdAt: string;
 }
 

@@ -22,6 +22,15 @@ import BookingForm from '@/components/BookingForm';
 import AdvancedSearch from '@/components/AdvancedSearch';
 import PasswordManager from '@/components/PasswordManager';
 import { printBookingPDF } from '@/lib/bookingPDF';
+import { Calendar } from '@/components/ui/calendar';
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogDescription 
+} from '@/components/ui/dialog';
+import { useMemo } from 'react';
 
 interface AdminUser {
   id: string;
@@ -59,10 +68,13 @@ interface ActivityLog {
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
   const [currentUser, setCurrentUser] = useState<AdminUser | null>(null);
-  const [activeTab, setActiveTab] = useState<'bookings' | 'activity'>('bookings');
+  const [activeTab, setActiveTab] = useState<'bookings' | 'activity' | 'calendar'>('bookings');
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [filteredBookings, setFilteredBookings] = useState<Booking[]>([]);
-  const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
+const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
+  const [showCalendarDetails, setShowCalendarDetails] = useState(false);
+  const [selectedBookings, setSelectedBookings] = useState<Booking[]>([]);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [editingBooking, setEditingBooking] = useState<Booking | null>(null);
   const [showPasswordManager, setShowPasswordManager] = useState(false);
@@ -187,6 +199,34 @@ export default function AdminDashboard() {
     setFilteredBookings(bookings);
   };
 
+  // Calendar logic
+  const bookingsByDate = useMemo(() => {
+    const map = new Map<string, Booking[]>();
+    bookings.forEach((booking) => {
+      if (booking.eventDate) {
+        if (!map.has(booking.eventDate)) map.set(booking.eventDate, []);
+        map.get(booking.eventDate)!.push(booking);
+      }
+    });
+    return map;
+  }, [bookings]);
+
+
+    const eventDates = useMemo(() => {
+      const dates = new Set<Date>();
+      bookings.forEach((booking) => {
+        if (booking.eventDate) {
+          const date = new Date(booking.eventDate);
+          date.setHours(0, 0, 0, 0);
+          dates.add(date);
+        }
+      });
+      return Array.from(dates);
+    }, [bookings]);
+
+
+
+
   const handlePasswordSave = (passwords: Record<string, string>) => {
     // تحديث كلمات المرور في localStorage
     localStorage.setItem('adminPasswords', JSON.stringify(passwords));
@@ -212,8 +252,21 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleCalendarSelect = (date: Date | undefined) => {
+    setSelectedDate(date);
+    if (date) {
+      const dateKey = date.toISOString().split('T')[0];
+      const bookingsForDate = bookingsByDate.get(dateKey) || [];
+      if (bookingsForDate.length > 0) {
+        setSelectedBookings(bookingsForDate);
+        setShowCalendarDetails(true);
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#1e1b1c]">
+
       <Sidebar />
       <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
@@ -280,6 +333,16 @@ export default function AdminDashboard() {
                 إدارة كلمات المرور
               </button>
             )}
+            <button
+              onClick={() => setActiveTab('calendar')}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                activeTab === 'calendar'
+                  ? 'bg-[#6b5a4a] text-white'
+                  : 'bg-[#252526] text-slate-400 hover:bg-[#1e1b1c]'
+              }`}
+            >
+              تقويم الحجوزات
+            </button>
             </div>
 
             {/* Bookings Tab */}
@@ -291,7 +354,7 @@ export default function AdminDashboard() {
                 <div className="mb-8">
                   <button
                     onClick={() => setShowBookingForm(true)}
-                    className="flex items-center gap-2 bg-[#6b5a4a] hover:bg-[#252525] text-[#C5A059] px-6 py-3 rounded-lg transition-all font-semibold"
+                    className="flex items-center gap-2 bg-[#6b5a4a] hover:bg-[#252525] text- px-6 py-3 rounded-lg transition-all font-semibold"
                   >
                     <Plus className="w-5 h-5" />
                     إضافة حجز جديد
@@ -408,6 +471,81 @@ export default function AdminDashboard() {
                 </div>
               </div>
             )}
+
+            {/* Calendar Tab */}
+            {activeTab === 'calendar' && (
+              <div className="space-y-6">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-2xl font-bold text-[#C5A059] flex items-center gap-2">
+                    تقويم الحجوزات
+                  </h2>
+                </div>
+
+                <div className="grid grid-cols-1 gap-0">
+                  {/* Calendar Full Width */}
+                  <div className="bg-[#252526] rounded-lg p-8 border border-[#C5A059]/20">
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={handleCalendarSelect}
+                      modifiers={{
+                        booked: eventDates
+                      }}
+
+                      classNames={{
+                        day: 'hover:bg-[#6b5a4a]/50 h-12 w-12 rounded-lg transition-all font-semibold text-sm p-2 relative [&:has([aria-selected].day-range-end)]:bg-[#C5A059]/20 [&:has([aria-selected].day-outside)]:bg-[#6b5a4a]/30 [&:has([aria-selected])]:ring-1 [&:has([aria-selected])]:ring-[#C5A059]/30 [&:has([aria-selected].day-outside)]:ring-white/20',
+                        day_selected: '!bg-[#C5A059] text-white hover:bg-[#C5A059] border-2 border-white/20 shadow-md font-bold',
+                        day_booked: 'relative ring-2 ring-red-500/70 bg-red-500/60 text-white font-bold shadow-lg hover:shadow-xl hover:scale-[1.05] transition-all cursor-pointer rounded-full flex items-center justify-center',
+
+
+
+                        day_range_middle: 'bg-[#6b5a4a]/30',
+                        day_range_end: '!bg-[#C5A059]',
+                        day_disabled: 'opacity-50 cursor-not-allowed',
+                        day_outside: 'opacity-70',
+                      }}
+                      onDayClick={(date) => {
+                        const dateKey = date.toISOString().split('T')[0];
+                        const bookingsForDate = bookingsByDate.get(dateKey) || [];
+                        if (bookingsForDate.length > 0) {
+                          setSelectedBookings(bookingsForDate);
+                          setSelectedDate(date);
+                          setShowCalendarDetails(true);
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Details Dialog */}
+                <Dialog open={showCalendarDetails} onOpenChange={setShowCalendarDetails}>
+                  <DialogContent className="max-w-6xl max-h-[85vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl">
+                        تفاصيل الحجوزات المختارة
+                      </DialogTitle>
+                      <DialogDescription>
+                        اضغط على بطاقة الحجز للطباعة أو التواصل أو التعديل
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+                      {selectedBookings.map((booking) => (
+                        <BookingCard
+                          key={booking.id}
+                          booking={booking}
+                          onPrint={handlePrintBooking}
+                          onWhatsApp={handleWhatsApp}
+                          onDelete={handleDeleteBooking}
+                          onEdit={handleEditBooking}
+                          isAdmin={true}
+                          isCustomerView={false}
+                        />
+                      ))}
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            )}
           </div>
         </section>
       </main>
@@ -424,3 +562,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+

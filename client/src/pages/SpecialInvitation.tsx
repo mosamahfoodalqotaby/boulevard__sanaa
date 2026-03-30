@@ -291,7 +291,7 @@ ${invitation.closingText}
         <body>
           <div class="invitation-container">
             <div class="header-section">
-              <div src="/logo.png" alt="Logo" class="logo"></div>
+              <div class="emoji">✨</div>
               <h2 class="main-title">دعوة استضافة خاصة</h2>
               <p class="subtitle">${invitation.customerTitle}</p>
               <p class="customer-name">${invitation.customerName}</p>

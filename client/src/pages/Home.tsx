@@ -138,11 +138,11 @@ export default function Home() {
             <p className="text-xl text-[#b89447] mb-8">
               احجز الآن واستمتع بأفضل الخدمات والمرافق الفاخرة
             </p>
-            {/* <Link href="/bookings">
+            <Link href="/bookings">
               <button className="px-12 py-4 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-[#6b5a4a] hover:to-yellow-700 text-[#1e1b1c] font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95">
                 احجز الآن
               </button>
-            </Link> */}
+            </Link>
           </div>
         </section>
       </main>

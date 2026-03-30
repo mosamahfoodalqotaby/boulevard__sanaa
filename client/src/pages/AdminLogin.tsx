@@ -302,7 +302,7 @@ export default function AdminLogin() {
             <h1 className="text-4xl font-bold text-[#C5A059] mb-2">
               بوليفارد صنعاء
             </h1>
-            <p className="text-gray-400">لوحة التحكم الإدارية</p>
+            <p className="text-[#C5A059]">لوحة التحكم الإدارية</p>
           </div>
 
           {/* Login Form */}
