@@ -8,7 +8,7 @@ interface WhatsAppButtonProps {
 
 export default function WhatsAppButton({
   message = 'مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟',
-  phoneNumber = '967784442228',
+phoneNumber = '967784442228',
   className = '',
 }: WhatsAppButtonProps) {
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;

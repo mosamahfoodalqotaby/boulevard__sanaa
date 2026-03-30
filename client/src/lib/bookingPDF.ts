@@ -15,7 +15,7 @@ export interface Booking {
   specialRequests?: string;
   additionalDetails?: string;
   generateQRCode?: boolean;
-  includeWelcomePage?: boolean;
+  generateImagePage?: boolean;
   status: 'pending' | 'confirmed' | 'cancelled';
   createdAt: string;
 }
@@ -57,10 +57,10 @@ export async function printBookingPDF(booking: Booking) {
 
     // تحويل الشعار والخطوط إلى base64 لضمان ظهورهما في PDF
     const logoBase64 = await fileToBase64('/logo-gold.png');
-    const welcomeImageBase64 = await fileToBase64('/12.jpg.jpeg');
-    // تحميل خط Cairo من CDN
     const cairoRegularBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Regular_e0244124.ttf');
     const cairoBoldBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Bold_04b1eaa6.ttf');
+
+    const customerWelcomeBase64 = await fileToBase64('/12.jpg.jpeg');
 
     // تضمين خط Cairo مباشرة كـ base64 لضمان الربط الصحيح للحروف العربية
     const fontFaceCSS = `
@@ -79,13 +79,6 @@ export async function printBookingPDF(booking: Booking) {
     `;
 
     const fontFamily = "'Cairo', Arial, Tahoma, sans-serif";
-
-    // صفحة الترحيب البسيطة
-    const welcomePageHTML = booking.includeWelcomePage && welcomeImageBase64 ? `
-      <div style="width:210mm;min-height:296mm;background:#1e1b1c;display:flex;align-items:center;justify-content:center;box-sizing:border-box;page-break-before:always;">
-        <img src="${welcomeImageBase64}" style="width:100%;height:100%;object-fit:contain;" />
-      </div>
-    ` : '';
 
     // بناء صفحة الفاتورة بالتصميم الجديد
     const invoicePageHTML = `
@@ -220,32 +213,6 @@ export async function printBookingPDF(booking: Booking) {
       </div>
     ` : '';
 
-    // صفحة الصورة الترحيبية ملء الصفحة
-    const imagePageHTML = booking.generateImagePage && welcomeImageBase64 ? `
-      <div style="width:210mm;height:297mm;background-image: url('${welcomeImageBase64}'); background-size: cover; background-position: center; background-repeat: no-repeat; position:relative; page-break-before:always; direction:rtl;">
-        <!-- Overlay نص أبيض شفاف للقراءة -->
-        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20mm;color:white;font-family:${fontFamily};">
-          <!-- شعار صغير -->
-          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:120px;height:120px;object-fit:contain;margin-bottom:20px;opacity:0.9;" />` : ''}
-          <!-- عنوان -->
-          <div style="text-align:center;font-size:28px;font-weight:bold;margin-bottom:10px;text-shadow:2px 2px 4px rgba(0,0,0,0.8);">الصفحة الترحيبية</div>
-          <!-- نص ترحيب -->
-          <div style="text-align:center;font-size:18px;line-height:1.5;max-width:70%;margin-bottom:30px;text-shadow:1px 1px 2px rgba(0,0,0,0.8);">
-            مرحباً بكم في <strong style="color:#E6C97A;">بوليفارد صنعاء</strong><br/>
-            استمتعوا بإقامتكم الراقية وخدماتنا المتميزة
-          </div>
-          <!-- معلومات حجز -->
-          <div style="text-align:center;font-size:16px;background:rgba(255,255,255,0.2);padding:15px;border-radius:10px;backdrop-filter:blur(5px);">
-            ${booking.id ? `<div style="margin-bottom:8px;"><strong>رقم الحجز:</strong> ${booking.id}</div>` : ''}
-            ${booking.name ? `<div style="margin-bottom:8px;"><strong>الاسم:</strong> ${booking.name}</div>` : ''}
-            ${booking.checkInDate ? `<div><strong>التاريخ:</strong> ${booking.checkInDate}</div>` : ''}
-          </div>
-        </div>
-        <!-- تذييل -->
-        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:12px;color:rgba(255,255,255,0.9);text-shadow:1px 1px 2px rgba(0,0,0,0.8);">Boulevard Sana'a | بوليفارد صنعاء</div>
-      </div>
-    ` : '';
-
     // بناء HTML الكامل مع تضمين الخط
     const fullHTML = `
       <div style="font-family:${fontFamily};">
@@ -257,8 +224,6 @@ export async function printBookingPDF(booking: Booking) {
           li { text-align: right; }
         </style>
         ${invoicePageHTML}
-        ${booking.includeWelcomePage ? welcomePageHTML : ''}
-        ${booking.generateImagePage ? imagePageHTML : ''}
         ${booking.generateQRCode ? barcodePageHTML : ''}
       </div>
     `;
@@ -290,19 +255,18 @@ export async function printBookingPDF(booking: Booking) {
     } catch {}
 
     // انتظار للتأكد من الرسم وتحميل الخط
-    await new Promise(resolve => setTimeout(resolve, 2500));
+    await new Promise(resolve => setTimeout(resolve, 1200));
 
     const contentEl = wrapper.firstElementChild as HTMLElement;
 
     const opt = {
       margin: 0,
       filename: `booking-${booking.id}.pdf`,
-      image: { type: 'png' as const, quality: 0.95 },
+      image: { type: 'png' as const, quality: 0.92 },
       html2canvas: { 
-        scale: 1.5,
-        backgroundColor: '#1e1b1c',
+        scale: 1.5, 
+        backgroundColor: '#1e1b1c', 
         useCORS: true,
-        allowTaint: true,
         logging: false,
         width: contentEl ? contentEl.scrollWidth : undefined,
         height: contentEl ? contentEl.scrollHeight : undefined,

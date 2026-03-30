@@ -152,7 +152,7 @@ export default function BookingCard({
         </div>
         <div>
           <p className="text-slate-400 text-xs uppercase tracking-wider">تاريخ المناسبة</p>
-          <p className="text-[#1e1b1c] font-semibold">{booking.eventDate ? new Date(booking.eventDate).toLocaleDateString('ar-SA') : '-'}</p>
+          <p className="text-white font-semibold">{booking.eventDate ? new Date(booking.eventDate).toLocaleDateString('ar-SA') : '-'}</p>
         </div>
         <div>
           <p className="text-slate-400 text-xs uppercase tracking-wider">عدد الضيوف</p>
