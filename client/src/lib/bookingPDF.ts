@@ -60,7 +60,7 @@ export async function printBookingPDF(booking: Booking) {
     const cairoRegularBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Regular_e0244124.ttf');
     const cairoBoldBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Bold_04b1eaa6.ttf');
 
-    const customerWelcomeBase64 = await fileToBase64('/12.jpg.jpeg');
+    const customerWelcomeBase64 = await fileToBase64('/1.jpg.jpeg');
 
     // تضمين خط Cairo مباشرة كـ base64 لضمان الربط الصحيح للحروف العربية
     const fontFaceCSS = `
@@ -84,20 +84,21 @@ export async function printBookingPDF(booking: Booking) {
     const invoicePageHTML = `
       <div style="width:210mm;min-height:296mm;padding:15mm 20mm;background:#1e1b1c;position:relative;direction:rtl;font-family:${fontFamily};color:#d4a574;box-sizing:border-box;">
         <!-- الشعار في الأعلى - مكبر -->
-        <div style="text-align:center;margin-bottom:20px;padding-top:5mm;">
-          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:180px;height:180px;object-fit:contain;display:inline-block;" />` : ''}
+        <div style="text-align:center;margin-bottom:6px;padding-top:5mm;">
+          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:185px;height:185px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+" />` : ''}
         </div>
         
         <!-- جدول البيانات الرئيسي -->
         <table style="width:100%;border-collapse:collapse;margin-bottom:20px;font-size:16px;direction:rtl;">
           <!-- صف 1: الاسم والمحترم -->
           <tr>
-            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">الاسم/</td>
+            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 16px 0;border:none;">الاسم/</td>
             <td style="text-align:center;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;flex:1;">${booking.name || ""}</td>
-            <td style="text-align:left;width:20%;color:#E6C97A;padding:0 0 8px 0;border:none;">المحترم</td>
+            <td style="text-align:left;width:20%;color:#E6C97A;padding:0 0 17px 0;border:none;">المحترم</td>
           </tr>
      <tr>
-  <td style="text-align:right;width:15%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">
+  <td style="text-align:right;width:15%;color:#E6C97A;font-weight:bold;padding:0 0 16px 0;border:none;">
     تاريخ الحجز/
   </td>
 
@@ -105,7 +106,7 @@ export async function printBookingPDF(booking: Booking) {
     ${booking.checkInDate || ""}
   </td>
 
-  <td style="text-align:right;width:15%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">
+  <td style="text-align:right;width:15%;color:#E6C97A;font-weight:bold;padding:0 0 16px 0;border:none;">
     تاريخ المناسبة/
   </td>
 
@@ -115,7 +116,7 @@ export async function printBookingPDF(booking: Booking) {
 </tr>
           <!-- صف 4: المبلغ المدفوع -->
           <tr>
-            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">المبلغ المدفوع/</td>
+            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 16px 0;border:none;">المبلغ المدفوع/</td>
             <td style="text-align:center;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">${booking.paidAmount || "0"} ريال</td>
             <td style="text-align:left;width:20%;padding:0 0 8px 0;border:none;"></td>
           </tr>
@@ -129,7 +130,7 @@ export async function printBookingPDF(booking: Booking) {
 
           <!-- صف 6: تفاصيل اضافية -->
           <tr>
-            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 8px 0;border:none;">تفاصيل اضافية/</td>
+            <td style="text-align:right;width:20%;color:#E6C97A;font-weight:bold;padding:0 0 12px 0;border:none;">تفاصيل اضافية/</td>
             <td style="text-align:center;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;word-break:break-word;max-width:300px;">${booking.additionalDetails || booking.specialRequests || ""}</td>
             <td style="text-align:left;width:20%;padding:0 0 8px 0;border:none;"></td>
           </tr>
@@ -139,53 +140,69 @@ export async function printBookingPDF(booking: Booking) {
         <div style="border-bottom:2px solid rgba(240, 201, 129, 0.8);margin:10px 0 25px 0;"></div>
        <!-- شروط وأحكام الحجز -->
 <div style="margin-bottom:20px;">
-  <div style="font-size:16px;font-weight:700;color:#E6C97A;margin-bottom:14px;text-align:center;font-family:${fontFamily};">
+  <div style="font-size:18px;font-weight:700;color:#E6C97A;margin-bottom:14px;text-align:center;font-family:${fontFamily};">
     شروط وأحكام الحجز
   </div>
 
   <ul style="font-size:14px;color:#E6C97A;line-height:2.2;text-align:right;direction:rtl;padding-right:20px;margin:0;font-weight:600;font-family:${fontFamily};">
     
-    <li style="margin-bottom:12px;">
+    <li style="margin-bottom:16px;">
       <strong>تأكيد الحجز:</strong> يعد العربون تأكيداً نهائياً للحجز لضمان حصرية المرفق لكم في التاريخ المحدد، ولا يسترد إلا في حال وجود بديل. لضمان استمرارية تشغيل المرفق وفق أعلى المعايير.
     </li>
 
-    <li style="margin-bottom:12px;">
+    <li style="margin-bottom:16px;">
       <strong>اكتمال الإجراءات:</strong> لضمان تجربة متكاملة بلا انقطاع، يرجى سداد كامل مبلغ الحجز وتأمين السلامة قبل موعد الدخول.
     </li>
 
-    <li style="margin-bottom:12px;">
+    <li style="margin-bottom:16px;">
       <strong>سلامة المرفق:</strong> يعد الضيف مسؤولاً عن سلامة وتجهيزات المرفق (الأثاث، المسبح، المساحات الخضراء). ويتم تغطية أي تلفيات ناتجة عن سوء الاستخدام، مع الالتزام بسداد الفارق إن وجد.
     </li>
 
-    <li style="margin-bottom:12px;">
+    <li style="margin-bottom:16px;">
       <strong>الهوية والخصوصية:</strong> حرصاً على أمن وخصوصية جميع ضيوفنا، يرجى إبراز الهوية الشخصية عند الدخول، وتسليم قائمة بأسماء الضيوف مسبقاً. مع العلم أن أي عدد إضافي يتجاوز السعة المقررة يخضع لرسوم إضافية بقيمة (4000 ريال) للفرد.
     </li>
 
-    <li style="margin-bottom:12px;">
+    <li style="margin-bottom:16px;">
       <strong>بروتوكول الصوت:</strong> لضمان سكينة المنطقة وخصوصية الجيران، يسمح باستخدام نظام صوتي محدد (سماعتين فقط)، وتقفل السماعات الخارجية عند الساعة 9:00 مساءً لمناسبات النساء و12:00 ليلاً لمناسبات الرجال، مع الالتزام بوضع السماعات في الأماكن المخصصة.
     </li>
 
-    <li style="margin-bottom:12px;">
+    <li style="margin-bottom:16px;">
       <strong>ميثاق السكينة (الممنوعات):</strong> يمنع منعاً باتاً استخدام الأسلحة النارية، أو (الفشفيش). كما يمنع تثبيت أي زينة قد تترك أثراً على الجدران أو التجهيزات، حفاظاً على جمالية المرفق لضيوفنا القادمين.
     </li>
 
-    <li style="margin-bottom:12px;">
+    <li style="margin-bottom:16px;">
       <strong>إخلاء المسؤولية:</strong> تخلي إدارة "بوليفارد صنعاء" مسؤوليتها عن فقدان المقتنيات الشخصية أو أي إصابات ناتجة عن حوادث المسبح أو سوء التصرف داخل القاعة.
     </li>
 
   </ul>
 </div>
         <!-- التذييل -->
-        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:9px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:8px;">Boulevard Sana'a | بوليفارد صنعاء</div>
+        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:12px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:8px;">Boulevard Sana'a | بوليفارد صنعاء</div>
       </div>
-    `;
-
+    `;const welcomePageHTML = `
+  <div style="
+    width:210mm;
+    height:296mm;
+    page-break-before: always;
+    position: relative;
+    overflow: hidden;
+  ">
+    <img src="${customerWelcomeBase64}" 
+     style="
+       width:100%;
+       height:100%;
+       object-fit:contain;   /* ✅ بدل cover */
+       background:#000;      /* يحافظ على الشكل */
+     " />
+  </div>
+`;
     // صفحة الباركود (فقط إذا تم اختيار توليد الباركود)
     const barcodePageHTML = (booking.generateQRCode && qrCodeImage) ? `
       <div style="width:210mm;min-height:296mm;padding:20mm;background:#1e1b1c;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;direction:rtl;font-family:${fontFamily};color:#d4a574;box-sizing:border-box;page-break-before:always;">
         <!-- الشعار في صفحة الباركود -->
-          <div style="text-align:center;margin-bottom:20px;padding-top:5mm;">
-          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:180px;height:180px;object-fit:contain;display:inline-block;" />` : ''}
+          <div style="text-align:center;margin-bottom:10px;padding-top:5mm;">
+          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:200px;height:200px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+" />` : ''}
         </div>
         <!-- خط زخرفي -->
         <div style="display:flex;align-items:center;width:70%;margin:10px 0 20px 0;">
@@ -194,7 +211,7 @@ export async function printBookingPDF(booking: Booking) {
           <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,#E6C97A);"></div>
         </div>
         <!-- عنوان QR Code -->
-        <div style="font-size:16px;font-weight:bold;color:#E6C97A;text-align:center;margin-bottom:20px;font-family:${fontFamily};">رمز الاستجابة السريعة للحجز</div>
+        <div style="font-size:18px;font-weight:bold;color:#E6C97A;text-align:center;margin-bottom:20px;font-family:${fontFamily};">رمز الاستجابة السريعة للحجز</div>
         <!-- QR Code -->
         <div style="border:3px solid #E6C97A;padding:15px;background:#1e1b1c;display:inline-flex;align-items:center;justify-content:center;">
           <div style="background:white;padding:10px;display:inline-flex;align-items:center;justify-content:center;">
@@ -202,31 +219,31 @@ export async function printBookingPDF(booking: Booking) {
           </div>
         </div>
         <!-- معلومات الحجز -->
-        <div style="text-align:center;margin-top:22px;font-size:11px;color:#E6C97A;">
-          ${booking.id ? `<div style="margin-bottom:6px;"><span style="font-weight:bold;">رقم الحجز:</span> ${booking.id}</div>` : ''}
-          ${booking.name ? `<div style="margin-bottom:6px;"><span style="font-weight:bold;">اسم الضيف:</span> ${booking.name}</div>` : ''}
-          ${booking.checkInDate ? `<div style="margin-bottom:6px;"><span style="font-weight:bold;">تاريخ الحجز:</span> ${booking.checkInDate}</div>` : ''}
+        <div style="text-align:center;margin-top:22px;font-size:14px;color:#E6C97A;">
+          ${booking.id ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">رقم الحجز:</span> ${booking.id}</div>` : ''}
+          ${booking.name ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">اسم الضيف:</span> ${booking.name}</div>` : ''}
+          ${booking.checkInDate ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">تاريخ الحجز:</span> ${booking.checkInDate}</div>` : ''}
         </div>
-        <div style="text-align:center;margin-top:18px;font-size:9px;color:#E6C97A;max-width:80%;">امسح رمز الاستجابة السريعة للوصول إلى تفاصيل حجزك والاستمتاع بالامتيازات الحصرية</div>
+        <div style="text-align:center;margin-top:18px;font-size:18px;color:#E6C97A;max-width:80%;">امسح رمز الاستجابة السريعة للوصول إلى تفاصيل حجزك والاستمتاع بالامتيازات الحصرية</div>
         <!-- التذييل -->
-        <div style="position:absolute;bottom:15mm;left:20mm;right:20mm;text-align:center;font-size:8px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:6px;">Boulevard Sana'a | بوليفارد صنعاء</div>
+        <div style="position:absolute;bottom:15mm;left:20mm;right:20mm;text-align:center;font-size:16px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:8px;">Boulevard Sana'a | بوليفارد صنعاء</div>
       </div>
     ` : '';
 
     // بناء HTML الكامل مع تضمين الخط
-    const fullHTML = `
-      <div style="font-family:${fontFamily};">
-        <style>
-          ${fontFaceCSS}
-          body { font-family: ${fontFamily}; }
-          strong { color: #E6C97A; }
-          ul { list-style-position: inside; }
-          li { text-align: right; }
-        </style>
-        ${invoicePageHTML}
-        ${booking.generateQRCode ? barcodePageHTML : ''}
-      </div>
-    `;
+   const fullHTML = `
+  <div style="font-family:${fontFamily};">
+    <style>
+      ${fontFaceCSS}
+      body { font-family: ${fontFamily}; }
+    </style>
+
+    ${invoicePageHTML}        <!-- الصفحة الأولى -->
+    ${welcomePageHTML}        <!-- الصفحة الثانية (الصورة) -->
+    ${booking.generateQRCode ? barcodePageHTML : ''} <!-- الصفحة الثالثة -->
+
+  </div>
+`;
 
     // إنشاء عنصر DOM مرئي مؤقتاً لتوليد PDF
     const wrapper = document.createElement('div');
@@ -264,15 +281,15 @@ export async function printBookingPDF(booking: Booking) {
       filename: `booking-${booking.id}.pdf`,
       image: { type: 'png' as const, quality: 0.92 },
       html2canvas: { 
-        scale: 1.5, 
-        backgroundColor: '#1e1b1c', 
+       scale: 4,   // 🔥 جودة عالية جداً
         useCORS: true,
+        backgroundColor: '#1e1b1c',
         logging: false,
         width: contentEl ? contentEl.scrollWidth : undefined,
         height: contentEl ? contentEl.scrollHeight : undefined,
       },
       jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const },
-      pagebreak: { mode: ['avoid-all'] as string[] }
+      pagebreak: { mode: ['css', 'legacy'] as string[] }
     };
 
     await (html2pdf() as any).set(opt).from(contentEl).save();

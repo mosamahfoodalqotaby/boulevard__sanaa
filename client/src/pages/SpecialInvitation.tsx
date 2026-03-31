@@ -291,7 +291,7 @@ ${invitation.closingText}
         <body>
           <div class="invitation-container">
             <div class="header-section">
-              <div class="emoji">✨</div>
+<img src="/logo.png" alt="شعار" style="width: 64px; height: 64px; margin: 0 auto 16px; filter: brightness(0) invert(1); display: block;" />
               <h2 class="main-title">دعوة استضافة خاصة</h2>
               <p class="subtitle">${invitation.customerTitle}</p>
               <p class="customer-name">${invitation.customerName}</p>
@@ -437,7 +437,7 @@ ${invitation.closingText}
           >
             {/* Header Section */}
             <div className="text-center mb-8">
-              <div className="text-4xl font-bold text-amber-400 mb-2">✨</div>
+<div className="text-4xl font-bold text-amber-400 mb-2">✨</div>
               <h2 className="text-3xl font-bold text-amber-300 mb-2">دعوة استضافة خاصة</h2>
               <p className="text-lg text-amber-200">{invitation.customerTitle}</p>
               <p className="text-2xl font-bold text-amber-300 mt-2">{invitation.customerName}</p>
@@ -556,14 +556,7 @@ ${invitation.closingText}
 
         {/* Action Buttons */}
         <div className="mt-4 flex gap-4 justify-center flex-wrap">
-          <Button
-            onClick={handlePrint}
-            variant="outline"
-            size="lg"
-            className="gap-2 border-amber-600 text-amber-600 hover:bg-amber-600/10"
-          >
-            طباعة
-          </Button>
+          
           <Button
             onClick={handleDownloadPDF}
             size="lg"
