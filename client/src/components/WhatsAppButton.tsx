@@ -11,8 +11,7 @@ export default function WhatsAppButton({
 phoneNumber = '967784442228',
   className = '',
 }: WhatsAppButtonProps) {
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
+const whatsappUrl = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
   return (
     <a
       href={whatsappUrl}

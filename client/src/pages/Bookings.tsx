@@ -84,7 +84,7 @@ export default function Bookings() {
     {booking.name}
   </h3>
   <p className="text-[#C5A059] text-right">
-    تاريخ الحجز: {new Date(booking.checkInDate).toLocaleDateString('ar-SA')}
+    Booking Date: {new Date(booking.checkInDate).toLocaleDateString('en-US')}
   </p>
 </div>
                     </div>

@@ -13,7 +13,13 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
     name: '',
     phone: '',
     serviceType: 'chalet' as 'chalet' | 'hall' | 'both',
-    checkInDate: '',
+    checkInDate: (() => {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    })(),
     eventDate: '',
     guestCount: 1,
     totalPrice: '',
@@ -48,25 +54,25 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
     
     // التحقق من الحقول المطلوبة
     if (!formData.name || !formData.phone || !formData.checkInDate || !formData.eventDate) {
-      setError('يرجى ملء جميع الحقول المطلوبة');
+      setError('Please fill all required fields');
       return;
     }
 
-    // التحقق من أن تاريخ المناسبة لا يكون قبل تاريخ الوصول
+// Check that event date is not before arrival date
     const checkInDate = new Date(formData.checkInDate);
     const eventDate = new Date(formData.eventDate);
 
     if (eventDate < checkInDate) {
-      setError('تاريخ المناسبة يجب أن يكون بعد أو مساوياً لتاريخ الوصول');
+      setError('Event date must be after or equal to arrival date');
       return;
     }
 
-    // التحقق من أن التاريخ ليس في الماضي
+    // Check that date is not in the past
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
     if (checkInDate < today) {
-      setError('تاريخ الوصول يجب أن يكون في المستقبل');
+      setError('Arrival date must be in the future');
       return;
     }
 
@@ -166,10 +172,10 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
             </div>
           </div>
 
-          {/* التواريخ */}
+          {/* Dates */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[#C5A059] font-semibold mb-2">تاريخ الوصول *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">Arrival Date *</label>
               <input
                 type="date"
                 name="checkInDate"
@@ -180,7 +186,7 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
               />
             </div>
             <div>
-              <label className="block text-[#C5A059] font-semibold mb-2">تاريخ المناسبة *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">Event Date *</label>
               <input
                 type="date"
                 name="eventDate"

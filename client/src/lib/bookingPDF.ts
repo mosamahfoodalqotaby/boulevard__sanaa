@@ -99,7 +99,7 @@ export async function printBookingPDF(booking: Booking) {
           </tr>
      <tr>
   <td style="text-align:right;width:15%;color:#E6C97A;font-weight:bold;padding:0 0 16px 0;border:none;">
-    تاريخ الحجز/
+    Booking Date/
   </td>
 
   <td style="text-align:center;width:35%;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">
@@ -107,7 +107,7 @@ export async function printBookingPDF(booking: Booking) {
   </td>
 
   <td style="text-align:right;width:15%;color:#E6C97A;font-weight:bold;padding:0 0 16px 0;border:none;">
-    تاريخ المناسبة/
+    Event Date/
   </td>
 
   <td style="text-align:center;width:35%;border-bottom:1px dashed rgba(240, 201, 129, 0.8);padding:0 10px 8px 10px;color:#d4a574;font-weight:bold;">
@@ -222,7 +222,7 @@ export async function printBookingPDF(booking: Booking) {
         <div style="text-align:center;margin-top:22px;font-size:14px;color:#E6C97A;">
           ${booking.id ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">رقم الحجز:</span> ${booking.id}</div>` : ''}
           ${booking.name ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">اسم الضيف:</span> ${booking.name}</div>` : ''}
-          ${booking.checkInDate ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">تاريخ الحجز:</span> ${booking.checkInDate}</div>` : ''}
+          ${booking.checkInDate ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">Booking Date:</span> ${booking.checkInDate}</div>` : ''}
         </div>
         <div style="text-align:center;margin-top:18px;font-size:18px;color:#E6C97A;max-width:80%;">امسح رمز الاستجابة السريعة للوصول إلى تفاصيل حجزك والاستمتاع بالامتيازات الحصرية</div>
         <!-- التذييل -->

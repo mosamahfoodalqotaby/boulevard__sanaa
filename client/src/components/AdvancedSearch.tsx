@@ -93,10 +93,10 @@ export default function AdvancedSearch({ onSearch, onClear }: AdvancedSearchProp
             />
           </div>
 
-          {/* تاريخ البداية */}
+          {/* Start Date */}
           <div>
             <label className="block text-slate-300 text-sm font-medium mb-2">
-              من التاريخ
+              From Date
             </label>
             <input
               type="date"
@@ -107,10 +107,10 @@ export default function AdvancedSearch({ onSearch, onClear }: AdvancedSearchProp
             />
           </div>
 
-          {/* تاريخ النهاية */}
+          {/* End Date */}
           <div>
             <label className="block text-slate-300 text-sm font-medium mb-2">
-              إلى التاريخ
+              To Date
             </label>
             <input
               type="date"

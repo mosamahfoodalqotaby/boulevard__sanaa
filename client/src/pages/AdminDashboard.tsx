@@ -213,17 +213,14 @@ const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
 
 
     const eventDates = useMemo(() => {
-      const dates = new Set<Date>();
-      bookings.forEach((booking) => {
-        if (booking.eventDate) {
-          const date = new Date(booking.eventDate);
-          date.setHours(0, 0, 0, 0);
-          dates.add(date);
-        }
-      });
-      return Array.from(dates);
-    }, [bookings]);
-
+  return bookings
+    .filter((b) => b.eventDate)
+    .map((b) => {
+      const d = new Date(b.eventDate!);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    });
+}, [bookings]);
 
 
 
@@ -234,7 +231,7 @@ const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
   };
 
   const handleWhatsApp = (booking: Booking) => {
-    const message = `مرحباً، أود الاستفسار عن حجزي:\n\nالاسم: ${booking.name}\nالهاتف: ${booking.phone}\nنوع الخدمة: ${booking.serviceType === 'chalet' ? 'شاليه فاخر' : booking.serviceType === 'hall' ? 'قاعة احتفالات' : 'شاليه + قاعة'}\nتاريخ الوصول: ${new Date(booking.checkInDate).toLocaleDateString('ar-SA')}`;
+    const message = `Hi, I'd like to inquire about my booking:\n\nName: ${booking.name}\nPhone: ${booking.phone}\nService: ${booking.serviceType === 'chalet' ? 'Luxury Chalet' : booking.serviceType === 'hall' ? 'Event Hall' : 'Chalet + Hall'}\nArrival Date: ${new Date(booking.checkInDate).toLocaleDateString('en-US')}`;
     const whatsappUrl = `https://wa.me/967${booking.phone.replace(/^0/, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -416,7 +413,7 @@ const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
                         <th className="px-6 py-4 text-right text-[#b89447] font-semibold">العملية</th>
                         <th className="px-6 py-4 text-right text-[#b89447] font-semibold">نوع البيانات</th>
                         <th className="px-6 py-4 text-right text-[#b89447] font-semibold">المستخدم</th>
-                        <th className="px-6 py-4 text-right text-[#b89447] font-semibold">الوقت والتاريخ</th>
+<th className="px-6 py-4 text-right text-[#b89447] font-semibold">Date & Time</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -453,7 +450,7 @@ const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
                               </td>
                               <td className="px-6 py-4 text-slate-300">{log.user}</td>
                               <td className="px-6 py-4 text-slate-400 text-sm">
-                                {new Date(log.timestamp).toLocaleString('ar-SA', {
+{new Date(log.timestamp).toLocaleString('en-US', {
                                   year: 'numeric',
                                   month: '2-digit',
                                   day: '2-digit',
@@ -485,35 +482,65 @@ const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
                   {/* Calendar Full Width */}
                   <div className="bg-[#252526] rounded-lg p-8 border border-[#C5A059]/20">
                     <Calendar
-                      mode="single"
-                      selected={selectedDate}
-                      onSelect={handleCalendarSelect}
-                      modifiers={{
-                        booked: eventDates
-                      }}
+  mode="single"
+  selected={selectedDate}
+  onSelect={(date) => {
+    if (!date) return;
 
-                      classNames={{
-                        day: 'hover:bg-[#6b5a4a]/50 h-12 w-12 rounded-lg transition-all font-semibold text-sm p-2 relative [&:has([aria-selected].day-range-end)]:bg-[#C5A059]/20 [&:has([aria-selected].day-outside)]:bg-[#6b5a4a]/30 [&:has([aria-selected])]:ring-1 [&:has([aria-selected])]:ring-[#C5A059]/30 [&:has([aria-selected].day-outside)]:ring-white/20',
-                        day_selected: '!bg-[#C5A059] text-white hover:bg-[#C5A059] border-2 border-white/20 shadow-md font-bold',
-                        day_booked: 'relative ring-2 ring-red-500/70 bg-red-500/60 text-white font-bold shadow-lg hover:shadow-xl hover:scale-[1.05] transition-all cursor-pointer rounded-full flex items-center justify-center',
+    const normalized = new Date(date);
+    normalized.setHours(0, 0, 0, 0);
 
+    const isBooked = eventDates.some(
+      (d) => d.getTime() === normalized.getTime()
+    );
 
+    if (isBooked) {
+  alert("⚠️ This day is already booked (event date)");
+    }
 
-                        day_range_middle: 'bg-[#6b5a4a]/30',
-                        day_range_end: '!bg-[#C5A059]',
-                        day_disabled: 'opacity-50 cursor-not-allowed',
-                        day_outside: 'opacity-70',
-                      }}
-                      onDayClick={(date) => {
-                        const dateKey = date.toISOString().split('T')[0];
-                        const bookingsForDate = bookingsByDate.get(dateKey) || [];
-                        if (bookingsForDate.length > 0) {
-                          setSelectedBookings(bookingsForDate);
-                          setSelectedDate(date);
-                          setShowCalendarDetails(true);
-                        }
-                      }}
-                    />
+    setSelectedDate(normalized);
+  }}
+
+  modifiers={{
+    booked: eventDates,
+  }}
+
+  classNames={{
+    day: 'hover:bg-[#6b5a4a]/50 h-12 w-12 rounded-lg transition-all font-semibold text-sm p-2 relative',
+    day_selected: '!bg-[#C5A059] text-white hover:bg-[#C5A059] border-2 border-white/20 shadow-md font-bold',
+    day_range_middle: 'bg-[#6b5a4a]/30',
+    day_range_end: '!bg-[#C5A059]',
+    day_disabled: 'opacity-50 cursor-not-allowed',
+    day_outside: 'opacity-70',
+  }}
+
+  modifiersClassNames={{
+    booked:
+      'relative ring-2 ring-red-500/70 bg-red-500/60 text-white font-bold shadow-lg hover:shadow-xl hover:scale-[1.05] transition-all cursor-pointer rounded-full flex items-center justify-center',
+  }}
+
+  onDayClick={(date) => {
+    const normalized = new Date(date);
+    normalized.setHours(0, 0, 0, 0);
+
+    const isBooked = eventDates.some(
+      (d) => d.getTime() === normalized.getTime()
+    );
+
+    if (isBooked) {
+  alert("⚠️ This day has a booking (event date)");
+    }
+
+    const dateKey = normalized.toISOString().split('T')[0];
+    const bookingsForDate = bookingsByDate.get(dateKey) || [];
+
+    if (bookingsForDate.length > 0) {
+      setSelectedBookings(bookingsForDate);
+      setSelectedDate(normalized);
+      setShowCalendarDetails(true);
+    }
+  }}
+/>
                   </div>
                 </div>
 
