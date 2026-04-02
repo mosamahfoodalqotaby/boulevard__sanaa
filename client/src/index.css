@@ -7,6 +7,32 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'BhinekaNumbers';
+  src: url('/BhinekaScript-Regular.otf') format('opentype');
+  unicode-range: U+0030-0039, U+002D; /* أرقام و - */
+}
+@font-face {
+  font-family: 'BhinekaDates';
+  src: url('/BhinekaScript-Regular.otf') format('opentype');
+  unicode-range: U+0030-0039, U+002D, U+002F; /* أرقام، -، / للتواريخ */
+}
+
+body {
+  font-family: 'BhinekaNumbers', 'BhinekaDates', 'Shams', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* تطبيق خطوط إنجليزية على عناصر التواريخ والأرقام */
+.date-display, .date-input, [class*="date"], input[type="date"], input[type="time"], .booking-date, time, .timestamp, .price, [class*="price"], input[type="number"], .amount, .total-price, .paid-amount, .remaining-amount, .guest-count {
+  font-family: sans-serif, monospace !important;
+}
+
+/* للعناصر التي تحتوي على تواريخ */
+*[class*="date"], *[id*="date"], .event-date, .checkin-date, .checkout-date {
+  font-family: 'BhinekaDates', 'BhinekaNumbers', monospace !important;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -234,3 +260,4 @@
     @apply bg-yellow-50;
   }
 }
+

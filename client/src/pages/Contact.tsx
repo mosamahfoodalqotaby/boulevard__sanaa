@@ -16,7 +16,7 @@ export default function Contact() {
       <Sidebar />
       <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
-      <main className="md:ml-64 pb-24">
+      <main className="md:mr-64 pb-24">
         {/* Header */}
         <section className="pt-20 pb-12 px-4 md:px-8 bg-[#1e1b1c]">
           <div className="container mx-auto max-w-4xl text-center text-white">
@@ -40,7 +40,7 @@ export default function Contact() {
                   <Phone className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-[#C5A059] mb-2">الهاتف</h3>
-                <p className="text-[#C5A059] dir-ltr font-mono font-bold text-lg tracking-wide">+967 7844 42228</p>
+                <p className="text-[#C5A059] font-mono font-bold text-lg tracking-wide">+967 7844 42228</p>
                 <p className="text-[#C5A059] text-sm mt-1">متاح 24/7</p>
               </div>
 
@@ -50,7 +50,7 @@ export default function Contact() {
                   <Mail className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-[#C5A059] mb-2">البريد الإلكتروني</h3>
-                <p className="text-[#C5A059] dir-ltr">zaidmotahr@gmail.com</p>
+                <p className="text-[#C5A059] font-mono">zaidmotahr@gmail.com</p>
                 <p className="text-[#C5A059] text-sm mt-1">نرد خلال 24 ساعة</p>
               </div>
 

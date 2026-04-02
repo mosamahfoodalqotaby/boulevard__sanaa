@@ -64,7 +64,7 @@ export default function VisitorQRCode() {
       <Sidebar />
       <WhatsAppButton phoneNumber="23456789" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
-      <main className="md:ml-64 pb-24">
+      <main className="md:mr-64 pb-24">
         {/* Header */}
         <section className="pt-20 pb-12 px-4 md:px-8 bg-gradient-to-r from-yellow-500 to-yellow-600">
           <div className="container mx-auto max-w-4xl text-center text-white">

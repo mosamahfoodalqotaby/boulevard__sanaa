@@ -175,7 +175,7 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
           {/* Dates */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[#C5A059] font-semibold mb-2">Arrival Date *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">تاريخ الوصول</label>
               <input
                 type="date"
                 name="checkInDate"
@@ -186,7 +186,7 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
               />
             </div>
             <div>
-              <label className="block text-[#C5A059] font-semibold mb-2">Event Date *</label>
+              <label className="block text-[#C5A059] font-semibold mb-2">تاريخ المناسبة</label>
               <input
                 type="date"
                 name="eventDate"

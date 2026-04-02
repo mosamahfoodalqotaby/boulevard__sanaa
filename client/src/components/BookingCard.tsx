@@ -88,7 +88,7 @@ export default function BookingCard({
         <div className="flex justify-between items-start mb-4">
           <div>
             <h3 className="text-xl font-bold text-[#b89447]">{booking.name}</h3>
-<p className="text-slate-400 text-sm">Booking Date: {new Date(booking.createdAt).toLocaleDateString('en-US')}</p>
+<p className="text-slate-400 text-sm date-display">Booking Date: {new Date(booking.createdAt).toLocaleDateString('en-US')}</p>
           </div>
           <span className={`px-3 py-1 rounded-full text-sm font-semibold border ${getStatusColor(booking.status)}`}>
             {getStatusLabel(booking.status)}
@@ -126,7 +126,7 @@ export default function BookingCard({
       <div className="flex justify-between items-start mb-4">
         <div>
           <h3 className="text-xl font-bold text-[#b89447]">{booking.name}</h3>
-          <p className="text-slate-400 text-sm">رقم الحجز: {booking.id}</p>
+<p className="text-slate-400 text-sm date-display">{booking.id}</p>
         </div>
         <span className={`px-3 py-1 rounded-full text-sm font-semibold border ${getStatusColor(booking.status)}`}>
           {getStatusLabel(booking.status)}
@@ -140,28 +140,28 @@ export default function BookingCard({
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
         <div>
           <p className="text-slate-400 text-xs uppercase tracking-wider">الهاتف</p>
-          <p className="text-white font-semibold">{booking.phone}</p>
+          <p className="text-white font-semibold date-display">{booking.phone}</p>
         </div>
         <div>
           <p className="text-slate-400 text-xs uppercase tracking-wider">نوع الخدمة</p>
           <p className="text-white font-semibold">{getServiceTypeLabel(booking.serviceType)}</p>
         </div>
         <div>
-          <p className="text-slate-400 text-xs uppercase tracking-wider">Booking Date</p>
-          <p className="text-white font-semibold">{new Date(booking.createdAt).toLocaleDateString('en-US')}</p>
+<p className="text-slate-400 text-xs uppercase tracking-wider">تاريخ الوصول</p>
+          <p className="text-white font-semibold date-display">{new Date(booking.createdAt).toLocaleDateString('en-US')}</p>
         </div>
         <div>
-          <p className="text-slate-400 text-xs uppercase tracking-wider">Event Date</p>
-          <p className="text-white font-semibold">{booking.eventDate ? new Date(booking.eventDate).toLocaleDateString('en-US') : '-'}</p>
+<p className="text-slate-400 text-xs uppercase tracking-wider">تاريخ المناسبة</p>
+          <p className="text-white font-semibold date-display">{booking.eventDate ? new Date(booking.eventDate).toLocaleDateString('en-US') : '-'}</p>
         </div>
         <div>
-          <p className="text-slate-400 text-xs uppercase tracking-wider">عدد الضيوف</p>
-          <p className="text-white font-semibold">{booking.guestCount}</p>
+<p className="text-slate-400 text-xs uppercase tracking-wider">عدد الضيوف</p>
+          <p className="text-white font-semibold guest-count">{booking.guestCount}</p>
         </div>
-        <div>
-          <p className="text-slate-400 text-xs uppercase tracking-wider">Arrival Date</p>
-          <p className="text-white font-semibold">{new Date(booking.checkInDate).toLocaleDateString('en-US')}</p>
-        </div>
+        {/* <div>
+<p className="text-slate-400 text-xs uppercase tracking-wider"> تاريخ المناسبة</p>
+          <p className="text-white font-semibold date-display">{new Date(booking.checkInDate).toLocaleDateString('en-US')}</p>
+        </div> */}
       </div>
 
       {/* Pricing */}
@@ -171,15 +171,15 @@ export default function BookingCard({
           <div className="grid grid-cols-3 gap-4 mb-6 bg-[#1e1b1c]/30 p-4 rounded-lg">
             <div>
               <p className="text-slate-400 text-xs uppercase tracking-wider">المبلغ الكلي</p>
-              <p className="text-[#C5A059] font-bold text-lg">{booking.totalPrice}</p>
+<p className="text-[#C5A059] font-bold text-lg price">{booking.totalPrice}</p>
             </div>
             <div>
               <p className="text-slate-400 text-xs uppercase tracking-wider">المبلغ المدفوع</p>
-              <p className="text-green-400 font-bold text-lg">{booking.paidAmount || '-'}</p>
+<p className="text-green-400 font-bold text-lg paid-amount">{booking.paidAmount || '-'}</p>
             </div>
             <div>
               <p className="text-slate-400 text-xs uppercase tracking-wider">المبلغ المتبقي</p>
-              <p className="text-red-400 font-bold text-lg">{booking.remainingAmount || '-'}</p>
+<p className="text-red-400 font-bold text-lg remaining-amount">{booking.remainingAmount || '-'}</p>
             </div>
           </div>
         </>

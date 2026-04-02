@@ -295,7 +295,7 @@ export default function AdminLogin() {
       <Sidebar />
       <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
-      <main className="md:ml-64 pb-24 flex items-center justify-center min-h-screen px-4">
+      <main className="md:mr-64 pb-24 flex items-center justify-center min-h-screen px-4">
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="text-center mb-8">

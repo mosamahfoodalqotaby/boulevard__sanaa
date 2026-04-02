@@ -9,7 +9,7 @@ export default function About() {
       <Sidebar />
       <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
-      <main className="md:ml-64 pb-24">
+      <main className="md:mr-64 pb-24">
         {/* Header */}
         <section className="pt-20 pb-12 px-4 md:px-8 bg-[#1e1b1c]">
           <div className="container mx-auto max-w-4xl text-center text-white">

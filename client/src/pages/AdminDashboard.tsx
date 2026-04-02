@@ -267,7 +267,7 @@ const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
       <Sidebar />
       <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
-      <main className="md:ml-64 pb-24">
+      <main className="md:mr-64 pb-24">
         {/* Hero Section */}
         <section className="pt-20 pb-12 px-4 md:px-8 bg-[#1e1b1c]">
           <div className="max-w-7xl mx-auto">
@@ -449,7 +449,7 @@ const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
                                 <span className="bg-[#1e1b1c] px-3 py-1 rounded text-sm">{entityLabel}</span>
                               </td>
                               <td className="px-6 py-4 text-slate-300">{log.user}</td>
-                              <td className="px-6 py-4 text-slate-400 text-sm">
+                              <td className="px-6 py-4 text-slate-400 text-sm date-display">
 {new Date(log.timestamp).toLocaleString('en-US', {
                                   year: 'numeric',
                                   month: '2-digit',

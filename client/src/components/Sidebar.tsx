@@ -23,15 +23,15 @@ export default function Sidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 md:hidden p-2 rounded-lg bg-[#C5A059] text-[#1e1b1c] hover:bg-[#b89447] transition-colors"
+className="fixed top-4 right-4 z-50 md:hidden p-2 rounded-lg bg-[#C5A059] text-[#1e1b1c] hover:bg-[#b89447] transition-colors"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen w-64 bg-[#1e1b1c] border-r border-[#C5A059]/30 shadow-lg transition-transform duration-300 z-40 md:translate-x-0 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+className={`fixed right-0 top-0 h-screen w-64 bg-[#1e1b1c] border-l border-[#C5A059]/30 shadow-lg transition-transform duration-300 z-40 md:translate-x-0 ${
+          isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'
         }`}
       >
         {/* Logo Section */}
@@ -66,14 +66,14 @@ export default function Sidebar() {
             <Phone className="text-[#C5A059] flex-shrink-0 mt-1" size={20} />
             <div className="text-sm">
               <p className="font-semibold text-[#C5A059]">الهاتف</p>
-              <p className="text-[#C5A059]/80  dir-ltr">+967784442228</p>
+<p className="text-[#C5A059]/80 font-mono">+967784442228</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <Mail className="text-[#C5A059] flex-shrink-0 mt-1" size={20} />
             <div className="text-sm">
               <p className="font-semibold text-[#C5A059]">البريد</p>
-              <p className="text-[#C5A059]/80 dir-ltr">zaidmotaher@gmail.com</p>
+<p className="text-[#C5A059]/80 font-mono">zaidmotaher@gmail.com</p>
             </div>
           </div>
         </div>

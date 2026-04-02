@@ -36,7 +36,7 @@ export default function QRWelcome() {
       <Sidebar />
       <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
-      <main className="md:ml-64 pb-24">
+      <main className="md:mr-64 pb-24">
         {/* Welcome Section */}
         <section className="pt-12 pb-8 px-4 md:px-8 bg-gradient-to-b from-[#252526] to-[#1e1b1c]">
           <div className="max-w-6xl mx-auto">

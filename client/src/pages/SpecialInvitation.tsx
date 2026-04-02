@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import html2pdf from 'html2pdf.js';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -42,45 +43,124 @@ export default function SpecialInvitation() {
     setIsEditOpen(false);
   };
 
-  const handleDownloadPDF = () => {
-    const element = document.getElementById('invitation-content');
-    if (!element) return;
-
-    const html2pdf = (window as any).html2pdf;
-    if (!html2pdf) {
-      alert('مكتبة PDF غير محملة');
-      return;
+  // Utility to convert file to base64
+  const fileToBase64 = async (url: string): Promise<string> => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = () => resolve('');
+        reader.readAsDataURL(blob);
+      });
+    } catch {
+      return '';
     }
+  };
 
-    // Create a clone of the element with all computed styles
-    const clone = element.cloneNode(true) as HTMLElement;
-    clone.style.margin = '0';
-    clone.style.padding = '48px';
-    clone.style.minHeight = 'auto';
-    
-    // Apply all styles from the original element
-    const computedStyle = window.getComputedStyle(element);
-    clone.style.background = computedStyle.background || '#1e1b1c';
-    clone.style.color = computedStyle.color || '#C5A059';
-    clone.style.fontFamily = 'Arial, sans-serif';
-    clone.style.direction = 'rtl';
-    clone.style.textAlign = 'right';
-    clone.style.lineHeight = '1.6';
+  const handleDownloadPDF = async () => {
+    try {
+      // Base64 assets
+      const logoBase64 = await fileToBase64(`${window.location.origin}/logo.png`);
+      const cairoRegularBase64 = await fileToBase64(`${window.location.origin}/Cairo-Regular.ttf`);
+      const cairoBoldBase64 = await fileToBase64(`${window.location.origin}/Cairo-Bold.ttf`);
 
-    const opt = {
-      margin: [10, 10, 10, 10],
-      filename: `دعوة-استضافة-${new Date().getTime()}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { 
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: '#1e1b1c'
-      },
-      jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' },
-    };
+      const fontFamily = "'Cairo', Arial, sans-serif";
+      const fontFaceCSS = `
+        @font-face {
+          font-family: 'Cairo';
+          font-weight: 400;
+          src: url(${cairoRegularBase64}) format('truetype');
+        }
+        @font-face {
+          font-family: 'Cairo';
+          font-weight: 700;
+          src: url(${cairoBoldBase64}) format('truetype');
+        }
+      `;
 
-    html2pdf().set(opt).from(clone).save();
+      // Full A4 HTML matching preview
+      const invitationHTML = `
+        <div style="width: 210mm; min-height: 297mm; padding: 48px; background: #1e1b1c; direction: rtl; text-align: right; font-family: ${fontFamily}; color: #d4a5a5; line-height: 1.6; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+          <style>${fontFaceCSS}</style>
+          
+          <!-- Header -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            ${logoBase64 ? `<img src="${logoBase64}" style="width: 200px; height: auto; margin: 0 auto 16px; display: block;" alt="Logo" />` : ''}
+            <h2 style="font-size: 32px; font-weight: bold; color: #fde047; margin-bottom: 16px;">دعوة استضافة خاصة</h2>
+            <p style="font-size: 18px; color: #bf9000; margin-bottom: 16px;">${invitation.customerTitle}</p>
+            <p style="font-size: 28px; font-weight: bold; color: #fde047;">${invitation.customerName}</p>
+          </div>
+
+          <!-- Divider 1 -->
+          <div style="height: 1px; background: linear-gradient(to right, transparent, #fde047, transparent); margin: 24px 0;"></div>
+
+          <!-- Main Content -->
+          <div style="flex: 1; margin: 32px 0; text-align: center;">
+            <p style="font-size: 16px; color: #bf9000; white-space: pre-wrap; word-wrap: break-word;">${invitation.mainText}</p>
+          </div>
+
+          <!-- Date Section -->
+          <div style="text-align: center; margin: 32px 0; border-top: 1px solid rgba(253, 224, 71, 0.3); border-bottom: 1px solid rgba(253, 224, 71, 0.3); padding: 16px 0;">
+            <p style="color: #bf9000; margin-bottom: 8px;">موعدنا معكم يوم:</p>
+            <p style="font-size: 24px; font-weight: bold; color: #fde047; margin-bottom: 16px;">
+              ${new Date(invitation.eventDate).toLocaleDateString('ar-SA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+            <p style="color: #bf9000;">الموافق بتاريخ: ${invitation.eventDateHijri}</p>
+          </div>
+
+          <!-- Divider 2 -->
+          <div style="height: 1px; background: linear-gradient(to right, transparent, #fde047, transparent); margin: 24px 0;"></div>
+
+          <!-- Closing -->
+          <div style="text-align: center;">
+            <p style="font-size: 16px; color: #bf9000; white-space: pre-wrap; word-wrap: break-word;">${invitation.closingText}</p>
+          </div>
+
+          <!-- Footer -->
+          <div style="text-align: center; margin-top: 32px; font-size: 14px; color: #fde047;">
+            <p>© ${new Date().getFullYear()} ${invitation.companyName}</p>
+          </div>
+        </div>
+      `;
+
+      // Temp DOM element
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = invitationHTML;
+      wrapper.style.position = 'fixed';
+      wrapper.style.left = '-9999px';
+      wrapper.style.top = '0';
+      document.body.appendChild(wrapper);
+
+      // Wait for images/fonts
+      await new Promise(resolve => setTimeout(resolve, 800));
+      await document.fonts.ready;
+
+      const content = wrapper.firstElementChild as HTMLElement;
+
+      const opt = {
+        margin: 0,
+        filename: `دعوة-${invitation.companyName}-${Date.now()}.pdf`,
+        image: { type: 'png' as const, quality: 0.95 },
+        html2canvas: { 
+          scale: 3,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#1e1b1c',
+          logging: false
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      } as any; // Type workaround for html2pdf
+
+      await html2pdf().set(opt).from(content).save();
+
+      // Cleanup
+      document.body.removeChild(wrapper);
+    } catch (error) {
+      console.error('PDF generation error:', error);
+      alert('خطأ في إنشاء PDF. تأكد من اتصال الإنترنت وحاول مرة أخرى.');
+    }
   };
 
   const getWhatsAppMessage = () => {
@@ -92,7 +172,7 @@ ${invitation.customerName}
 ${invitation.mainText}
 
 📅 موعدنا معكم يوم:
-${new Date(invitation.eventDate).toLocaleDateString('ar-SA', {
+${new Date(invitation.eventDate).toLocaleDateString('en-US', {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
@@ -457,7 +537,7 @@ ${invitation.closingText}
             <div className="text-center my-8 border-t border-b border-amber-400/30 py-4">
               <p className="text-amber-200 mb-2">موعدنا معكم يوم:</p>
               <p className="text-2xl font-bold text-amber-300 mb-4">
-                {new Date(invitation.eventDate).toLocaleDateString('ar-SA', {
+{new Date(invitation.eventDate).toLocaleDateString('en-US', {
                   weekday: 'long',
                   year: 'numeric',
                   month: 'long',
@@ -490,7 +570,7 @@ ${invitation.closingText}
             <MessageCircle className="w-5 h-5 text-green-400" />
             <h3 className="text-lg font-bold text-green-400">إرسال الدعوة عبر WhatsApp</h3>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-end" dir="ltr">
+<div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-end">
             <div className="flex-shrink-0">
               <label className="block text-sm text-slate-400 mb-1.5 text-right" dir="rtl">رمز الدولة</label>
               <select
@@ -524,7 +604,7 @@ ${invitation.closingText}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder="مثال: 777123456"
                 className="h-10 bg-[#1e1b1c] border-slate-600 text-white placeholder:text-slate-500 focus:ring-green-500 focus:border-green-500"
-                dir="ltr"
+
               />
             </div>
             <Button

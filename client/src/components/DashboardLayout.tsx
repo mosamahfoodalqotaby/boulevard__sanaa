@@ -44,7 +44,7 @@ export default function DashboardLayout({
 }) {
   const [sidebarWidth, setSidebarWidth] = useState(() => {
     const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
-    return saved ? parseInt(saved, 10) : DEFAULT_WIDTH;
+    return saved ? parseInt(saved || "280", 10) : DEFAULT_WIDTH;
   });
   const { loading, user } = useAuth();
 
@@ -154,9 +154,10 @@ function DashboardLayoutContent({
   return (
     <>
       <div className="relative" ref={sidebarRef}>
-        <Sidebar
+          <Sidebar
+          side="right"
           collapsible="icon"
-          className="border-r-0"
+          className="border-l-0"
           disableTransition={isResizing}
         >
           <SidebarHeader className="h-16 justify-center">

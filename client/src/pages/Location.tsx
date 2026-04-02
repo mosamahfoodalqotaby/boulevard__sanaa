@@ -46,7 +46,7 @@ export default function Location() {
       <Sidebar />
       <WhatsAppButton phoneNumber="23456789" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
-      <main className="md:ml-64 pb-24">
+      <main className="md:mr-64 pb-24">
         <section className="pt-20 pb-12 px-4 md:px-8">
           <div className="container mx-auto max-w-4xl text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-[#C5A059] mb-4">موقعنا</h1>

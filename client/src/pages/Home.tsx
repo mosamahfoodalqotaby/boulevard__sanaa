@@ -51,7 +51,7 @@ export default function Home() {
       <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
       {/* Main Content */}
-      <main className="md:ml-64 pb-24">
+      <main className="md:mr-64 pb-24">
         {/* Hero Section */}
         <section className="relative pt-20 pb-32 px-4 md:px-8 overflow-hidden bg-gradient-to-b from-[#252526] to-[#1e1b1c]">
           <div className="absolute inset-0 opacity-5">

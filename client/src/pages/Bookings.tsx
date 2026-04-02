@@ -46,7 +46,7 @@ export default function Bookings() {
       <Sidebar />
       <WhatsAppButton phoneNumber="967784442228" message="مرحبا بك في بوليفارد صنعاء! كيف يمكنني مساعدتك؟" />
 
-      <main className="md:ml-64 pb-24">
+      <main className="md:mr-64 pb-24">
         {/* Hero Section */}
         <section className="pt-20 pb-12 px-4 md:px-8 bg-gradient-to-r from-[#252526] to-[#1e1b1c] border-b-2 border-[#C5A059]">
           <div className="max-w-7xl mx-auto">
@@ -84,8 +84,8 @@ export default function Bookings() {
     {booking.name}
   </h3>
   <p className="text-[#C5A059] text-right">
-    Booking Date: {new Date(booking.checkInDate).toLocaleDateString('en-US')}
-  </p>
+    تايخ الحجز : <p className="text-[#C5A059] font-semibold date-display">{new Date(booking.checkInDate).toLocaleDateString('en-US')}
+  </p></p>
 </div>
                     </div>
                     
