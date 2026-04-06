@@ -10,7 +10,20 @@
 @font-face {
   font-family: 'BhinekaNumbers';
   src: url('/BhinekaScript-Regular.otf') format('opentype');
-  unicode-range: U+0030-0039, U+002D; /* أرقام و - */
+  unicode-range: U+0030-0039, U+0660-0669, U+002D; /* أرقام إنجليزية وعربية و - */
+}
+
+@font-face {
+  font-family: 'BhinekaScriptAR';
+  src: url('/BhinekaScript-Regular.otf') format('opentype');
+  unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFC; /* نصوص عربية */
+}
+
+@font-face {
+  font-family: 'BhinekaScript';
+  src: url('/BhinekaScript-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
   font-family: 'BhinekaDates';
@@ -183,6 +196,38 @@ body {
 }
 
 @layer components {
+  /* Arabic Calendar Styles - react-day-picker */
+  .rdp {
+    direction: rtl;
+  }
+  
+  .rdp-weekday,
+  .rdp-caption_label,
+  .rdp-day span,
+  .rdp-dropdown_month,
+  .rdp-dropdown_year {
+    font-family: 'BhinekaScriptAR', 'BhinekaScript', 'BhinekaNumbers', 'Shams', sans-serif !important;
+    font-weight: 500;
+  }
+  
+  .rdp-day span {
+    font-size: 1.1rem;
+  }
+  
+  .rdp-weekday {
+    font-size: 0.85rem;
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .rdp-caption_label {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  
+  .rdp-nav_button {
+    font-size: 1.5rem;
+  }
+
   .container {
     width: 100%;
     margin-left: auto;

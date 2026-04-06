@@ -484,22 +484,20 @@ const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
                     <Calendar
   mode="single"
   selected={selectedDate}
-  onSelect={(date) => {
-    if (!date) return;
-
-    const normalized = new Date(date);
-    normalized.setHours(0, 0, 0, 0);
-
-    const isBooked = eventDates.some(
-      (d) => d.getTime() === normalized.getTime()
-    );
-
-    if (isBooked) {
-  alert("⚠️ This day is already booked (event date)");
-    }
-
-    setSelectedDate(normalized);
-  }}
+    onSelect={(date) => {
+      setSelectedDate(date);
+      if (date) {
+        const normalized = new Date(date);
+        normalized.setHours(0, 0, 0, 0);
+const dateKey = normalized.getFullYear() + '-' +
+  String(normalized.getMonth() + 1).padStart(2, '0') + '-' +
+  String(normalized.getDate()).padStart(2, '0');        const bookingsForDate = bookingsByDate.get(dateKey) || [];
+        if (bookingsForDate.length > 0) {
+          setSelectedBookings(bookingsForDate);
+          setShowCalendarDetails(true);
+        }
+      }
+    }}
 
   modifiers={{
     booked: eventDates,
@@ -519,27 +517,6 @@ const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
       'relative ring-2 ring-red-500/70 bg-red-500/60 text-white font-bold shadow-lg hover:shadow-xl hover:scale-[1.05] transition-all cursor-pointer rounded-full flex items-center justify-center',
   }}
 
-  onDayClick={(date) => {
-    const normalized = new Date(date);
-    normalized.setHours(0, 0, 0, 0);
-
-    const isBooked = eventDates.some(
-      (d) => d.getTime() === normalized.getTime()
-    );
-
-    if (isBooked) {
-  alert("⚠️ This day has a booking (event date)");
-    }
-
-    const dateKey = normalized.toISOString().split('T')[0];
-    const bookingsForDate = bookingsByDate.get(dateKey) || [];
-
-    if (bookingsForDate.length > 0) {
-      setSelectedBookings(bookingsForDate);
-      setSelectedDate(normalized);
-      setShowCalendarDetails(true);
-    }
-  }}
 />
                   </div>
                 </div>

@@ -138,8 +138,8 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                placeholder="أدخل رقم الهاتف"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+                placeholder="Enter phone number"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 font-['BhinekaNumbers'] text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a] dir-ltr"
               />
             </div>
           </div>
@@ -167,7 +167,7 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
                 value={formData.guestCount}
                 onChange={handleInputChange}
                 min="1"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] focus:outline-none focus:border-[#6b5a4a]"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 font-['BhinekaNumbers'] text-[#C5A059] focus:outline-none focus:border-[#6b5a4a] dir-ltr"
               />
             </div>
           </div>
@@ -207,8 +207,10 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
                 name="totalPrice"
                 value={formData.totalPrice}
                 onChange={handleInputChange}
-                placeholder="مثال: 5000 ريال"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+                placeholder="5000"
+                inputMode="decimal"
+                dir="ltr"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 font-['BhinekaNumbers'] text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
             <div>
@@ -218,8 +220,10 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
                 name="paidAmount"
                 value={formData.paidAmount}
                 onChange={handleInputChange}
-                placeholder="مثال: 2500 ريال"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+                placeholder="2500"
+                inputMode="decimal"
+                dir="ltr"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 font-['BhinekaNumbers'] text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
             <div>
@@ -229,8 +233,10 @@ export default function BookingForm({ onClose, onSubmit }: BookingFormProps) {
                 name="remainingAmount"
                 value={formData.remainingAmount}
                 onChange={handleInputChange}
-                placeholder="مثال: 2500 ريال"
-                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
+                placeholder="2500"
+                inputMode="decimal"
+                dir="ltr"
+                className="w-full bg-[#1e1b1c] border border-slate-600 rounded-lg px-4 py-2 font-['BhinekaNumbers'] text-[#C5A059] placeholder-slate-400 focus:outline-none focus:border-[#6b5a4a]"
               />
             </div>
           </div>
