@@ -52,7 +52,7 @@ export default function QRNameInput() {
             <img 
               src={src}
               alt={`صورة ${index + 1}`}
-              className="w-full h-full object-cover"
+className="w-full h-full object-contain"
             />
           </div>
         ))}
