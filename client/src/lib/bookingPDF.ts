@@ -48,7 +48,7 @@ export async function printBookingPDF(booking: Booking) {
         {
           errorCorrectionLevel: 'H',
           type: 'image/png',
-          width: 250,
+          width: 140,
           margin: 1,
           color: { dark: '#000000', light: '#FFFFFF' },
         }
@@ -57,26 +57,25 @@ export async function printBookingPDF(booking: Booking) {
 
     // تحويل الشعار والخطوط إلى base64 لضمان ظهورهما في PDF
     const logoBase64 = await fileToBase64('/logo-gold.png');
-    const cairoRegularBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Regular_e0244124.ttf');
-    const cairoBoldBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Bold_04b1eaa6.ttf');
+    // const cairoRegularBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Regular_e0244124.ttf');
+    // const cairoBoldBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Bold_04b1eaa6.ttf');
 
-    const customerWelcomeBase64 = await fileToBase64('/1.jpg.jpeg');
 
     // تضمين خط Cairo مباشرة كـ base64 لضمان الربط الصحيح للحروف العربية
-    const fontFaceCSS = `
-      @font-face {
-        font-family: 'Cairo';
-        font-weight: 400;
-        font-style: normal;
-        src: url('${cairoRegularBase64}') format('truetype');
-      }
-      @font-face {
-        font-family: 'Cairo';
-        font-weight: 700;
-        font-style: normal;
-        src: url('${cairoBoldBase64}') format('truetype');
-      }
-    `;
+    // const fontFaceCSS = `
+    //   @font-face {
+    //     font-family: 'Cairo';
+    //     font-weight: 400;
+    //     font-style: normal;
+    //     src: url('${cairoRegularBase64}') format('truetype');
+    //   }
+    //   @font-face {
+    //     font-family: 'Cairo';
+    //     font-weight: 700;
+    //     font-style: normal;
+    //     src: url('${cairoBoldBase64}') format('truetype');
+    //   }
+    // `;
 
     const fontFamily = "'Cairo', Arial, Tahoma, sans-serif";
 
@@ -85,7 +84,7 @@ export async function printBookingPDF(booking: Booking) {
       <div style="width:210mm;min-height:296mm;padding:15mm 20mm;background:#1e1b1c;position:relative;direction:rtl;font-family:${fontFamily};color:#d4a574;box-sizing:border-box;">
         <!-- الشعار في الأعلى - مكبر -->
         <div style="text-align:center;margin-bottom:6px;padding-top:5mm;">
-          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:185px;height:185px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+          ${logoBase64 ? `<img src="/logo-gold.png"alt="Logo" style="width:185px;height:185px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
 " />` : ''}
         </div>
         
@@ -181,9 +180,10 @@ export async function printBookingPDF(booking: Booking) {
   </ul>
 </div>
         <!-- التذييل -->
-        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:12px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:8px;">Boulevard Sana'a | بوليفارد صنعاء</div>
+        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:12px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:6px;">Boulevard Sana'a | بوليفارد صنعاء</div>
       </div>
-    `;const welcomePageHTML = `
+    `;
+    const welcomePageHTML = `
   <div style="
     width:210mm;
     height:296mm;
@@ -191,7 +191,7 @@ export async function printBookingPDF(booking: Booking) {
     position: relative;
     overflow: hidden;
   ">
-    <img src="${customerWelcomeBase64}" 
+    <img src="/1.jpg.jpeg" 
      style="
        width:100%;
        height:100%;
@@ -205,7 +205,7 @@ export async function printBookingPDF(booking: Booking) {
       <div style="width:210mm;min-height:296mm;padding:20mm;background:#1e1b1c;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;direction:rtl;font-family:${fontFamily};color:#d4a574;box-sizing:border-box;page-break-before:always;">
         <!-- الشعار في صفحة الباركود -->
           <div style="text-align:center;margin-bottom:10px;padding-top:5mm;">
-          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:200px;height:200px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+          ${logoBase64 ? `<img src="/logo-gold.png"alt="Logo" style="width:200px;height:200px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
 " />` : ''}
         </div>
         <!-- خط زخرفي -->
@@ -238,8 +238,8 @@ export async function printBookingPDF(booking: Booking) {
    const fullHTML = `
   <div style="font-family:${fontFamily}; font-size:18px;">
     <style>
-      ${fontFaceCSS}
-      body { font-family: ${fontFamily}; }
+       body { font-family: ${fontFamily}; }
+
     </style>
 
     ${invoicePageHTML}        <!-- الصفحة الأولى -->
@@ -279,15 +279,14 @@ export async function printBookingPDF(booking: Booking) {
     await new Promise(resolve => setTimeout(resolve, 1200));
 
     const contentEl = wrapper.firstElementChild as HTMLElement;
-
-    const opt = {
+const opt = {
   margin: 0,
   filename: `booking-${booking.id}.pdf`,
 
-  image: { type: 'jpeg', quality: 0.85 }, // 👈 رفعناها شوي
+  image: { type: 'jpeg', quality: 0.7 },
 
   html2canvas: { 
-    scale: 2,   // 👈 أهم تعديل (كان قليل)
+    scale: 1.5,
     useCORS: true,
     backgroundColor: '#1e1b1c',
     logging: false,
@@ -301,7 +300,6 @@ export async function printBookingPDF(booking: Booking) {
 
   pagebreak: { mode: ['css', 'legacy'] }
 };
-
     await (html2pdf() as any).set(opt).from(contentEl).save();
     
     // تنظيف
