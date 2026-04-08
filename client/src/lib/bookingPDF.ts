@@ -212,7 +212,7 @@ export async function printBookingPDF(booking: Booking) {
     position: relative;
     overflow: hidden;
   ">
-    <img src="/1.jpg.jpeg" 
+    <img src="/1.png" 
      style="
        width:100%;
        height:100%;
