@@ -25,7 +25,11 @@ function createAuthContext(): TrpcContext {
     } as TrpcContext["req"],
     res: {
       clearCookie: () => {},
-    } as TrpcContext["res"],
+      status: () => ({ send: () => {}, end: () => {}, json: () => {}, }),
+      send: () => {},
+      end: () => {},
+      json: () => {},
+    } as any,
   };
 
   return ctx;

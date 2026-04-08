@@ -35,7 +35,27 @@ async function fileToBase64(url: string): Promise<string> {
     return '';
   }
 }
+async function compressImage(fileUrl: string, maxWidth = 1200, maxHeight = 1200, quality = 0.6) {
+  const img = new Image();
+  img.src = fileUrl;
+  await img.decode();
 
+  const canvas = document.createElement('canvas');
+  let { width, height } = img;
+
+  if (width > maxWidth || height > maxHeight) {
+    const scale = Math.min(maxWidth / width, maxHeight / height);
+    width = width * scale;
+    height = height * scale;
+  }
+
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+  ctx?.drawImage(img, 0, 0, width, height);
+
+  return canvas.toDataURL('image/jpeg', quality); // compressed
+}
 export async function printBookingPDF(booking: Booking) {
   try {
     // توليد QR Code
@@ -54,6 +74,7 @@ export async function printBookingPDF(booking: Booking) {
         }
       );
     }
+    
 
     // تحويل الشعار والخطوط إلى base64 لضمان ظهورهما في PDF
     const logoBase64 = await fileToBase64('/logo-gold.png');
@@ -191,7 +212,7 @@ export async function printBookingPDF(booking: Booking) {
     position: relative;
     overflow: hidden;
   ">
-    <img src="/1.jpg.jpeg" 
+    <img src="/1.png" 
      style="
        width:100%;
        height:100%;

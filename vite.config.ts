@@ -167,6 +167,15 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    assetsInlineLimit: 4096, // 4KB - تمنع تضمين الصور الكبيرة كـ Base64 في ملفات JS
+    sourcemap: false, // تقليل حجم ملفات البناء
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'html2pdf.js', 'qrcode'],
+        },
+      },
+    },
   },
   server: {
     host: true,
