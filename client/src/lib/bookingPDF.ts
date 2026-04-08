@@ -48,7 +48,7 @@ export async function printBookingPDF(booking: Booking) {
         {
           errorCorrectionLevel: 'H',
           type: 'image/png',
-          width: 250,
+width:220,
           margin: 1,
           color: { dark: '#000000', light: '#FFFFFF' },
         }
@@ -57,24 +57,25 @@ export async function printBookingPDF(booking: Booking) {
 
     // تحويل الشعار والخطوط إلى base64 لضمان ظهورهما في PDF
     const logoBase64 = await fileToBase64('/logo-gold.png');
-    const cairoRegularBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Regular_e0244124.ttf');
-    const cairoBoldBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Bold_04b1eaa6.ttf');
+// Local WOFF2 fonts - smaller & faster
+const cairoRegularBase64 = '/Cairo-Regular.woff2';
+const cairoBoldBase64 = '/Cairo-Bold.woff2';
 
     const customerWelcomeBase64 = await fileToBase64('/1.jpg.jpeg');
 
     // تضمين خط Cairo مباشرة كـ base64 لضمان الربط الصحيح للحروف العربية
     const fontFaceCSS = `
-      @font-face {
+@font-face {
         font-family: 'Cairo';
         font-weight: 400;
         font-style: normal;
-        src: url('${cairoRegularBase64}') format('truetype');
+        src: url('${cairoRegularBase64}') format('woff2');
       }
       @font-face {
         font-family: 'Cairo';
         font-weight: 700;
         font-style: normal;
-        src: url('${cairoBoldBase64}') format('truetype');
+        src: url('${cairoBoldBase64}') format('woff2');
       }
     `;
 
@@ -85,8 +86,7 @@ export async function printBookingPDF(booking: Booking) {
       <div style="width:210mm;min-height:296mm;padding:15mm 20mm;background:#1e1b1c;position:relative;direction:rtl;font-family:${fontFamily};color:#d4a574;box-sizing:border-box;">
         <!-- الشعار في الأعلى - مكبر -->
         <div style="text-align:center;margin-bottom:6px;padding-top:5mm;">
-          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:185px;height:185px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
-" />` : ''}
+          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:140px;height:140px;object-fit:contain;display:inline-block;filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));" />` : ''}
         </div>
         
         <!-- جدول البيانات الرئيسي -->
@@ -204,9 +204,8 @@ export async function printBookingPDF(booking: Booking) {
     const barcodePageHTML = (booking.generateQRCode && qrCodeImage) ? `
       <div style="width:210mm;min-height:296mm;padding:20mm;background:#1e1b1c;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;direction:rtl;font-family:${fontFamily};color:#d4a574;box-sizing:border-box;page-break-before:always;">
         <!-- الشعار في صفحة الباركود -->
-          <div style="text-align:center;margin-bottom:10px;padding-top:5mm;">
-          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:200px;height:200px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
-" />` : ''}
+  <div style="text-align:center;margin-bottom:10px;padding-top:5mm;">
+          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:140px;height:140px;object-fit:contain;display:inline-block;filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));" />` : ''}
         </div>
         <!-- خط زخرفي -->
         <div style="display:flex;align-items:center;width:70%;margin:10px 0 20px 0;">
@@ -219,7 +218,7 @@ export async function printBookingPDF(booking: Booking) {
         <!-- QR Code -->
         <div style="border:3px solid #E6C97A;padding:15px;background:#1e1b1c;display:inline-flex;align-items:center;justify-content:center;">
           <div style="background:white;padding:10px;display:inline-flex;align-items:center;justify-content:center;">
-            <img src="${qrCodeImage}" alt="QR Code" style="width:240px;height:240px;display:block;" />
+            <img src="${qrCodeImage}" alt="QR Code" style="width:220px;height:220px;display:block;" />
           </div>
       </div>
         <!-- معلومات الحجز -->
@@ -283,9 +282,9 @@ export async function printBookingPDF(booking: Booking) {
     const opt = {
       margin: 0,
       filename: `booking-${booking.id}.pdf`,
-      image: { type: 'png' as const, quality: 0.92 },
+image: { type: 'jpeg' as const, quality: 0.85 },
       html2canvas: { 
-       scale: 4,   // 🔥 جودة عالية جداً
+scale: 2.5, // جودة عالية + حجم صغير (≤20MB)
         useCORS: true,
         backgroundColor: '#1e1b1c',
         logging: false,
