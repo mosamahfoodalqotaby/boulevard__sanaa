@@ -226,7 +226,7 @@ export async function printBookingPDF(booking: Booking) {
         <div style="text-align:center;margin-top:22px;font-size:14px;color:#E6C97A;">
           ${booking.id ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">رقم الحجز:</span> <span style="font-family: Arial, monospace, sans-serif !important;">${booking.id}</span></div>` : ''}
           ${booking.name ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">اسم الضيف:</span> ${booking.name}</div>` : ''}
-          ${booking.checkInDate ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">تاريخ الحجز:</span> <span style="font-family: Arial, monospace, sans-serif !important;">${booking.checkInDate}</span></div>` : ''}
+          ${booking.checkInDate ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;"> تاريخ الحجز:</span> <span style="font-family: Arial, monospace, sans-serif !important;">${booking.checkInDate}</span></div>` : ''}
         </div>
         <div style="text-align:center;margin-top:18px;font-size:18px;color:#E6C97A;max-width:80%;">امسح رمز الاستجابة السريعة للوصول إلى تفاصيل حجزك والاستمتاع بالامتيازات الحصرية</div>
         <!-- التذييل -->
@@ -284,7 +284,7 @@ export async function printBookingPDF(booking: Booking) {
   margin: 0,
   filename: `booking-${booking.id}.pdf`,
 
-  image: { type: 'jpeg', quality: 1 }, // 👈 رفعناها شوي
+  image: { type: 'jpeg', quality: 0.85 }, // 👈 رفعناها شوي
 
   html2canvas: { 
     scale: 2,   // 👈 أهم تعديل (كان قليل)
