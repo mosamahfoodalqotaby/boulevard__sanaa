@@ -35,27 +35,7 @@ async function fileToBase64(url: string): Promise<string> {
     return '';
   }
 }
-async function compressImage(fileUrl: string, maxWidth = 1200, maxHeight = 1200, quality = 0.6) {
-  const img = new Image();
-  img.src = fileUrl;
-  await img.decode();
 
-  const canvas = document.createElement('canvas');
-  let { width, height } = img;
-
-  if (width > maxWidth || height > maxHeight) {
-    const scale = Math.min(maxWidth / width, maxHeight / height);
-    width = width * scale;
-    height = height * scale;
-  }
-
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
-  ctx?.drawImage(img, 0, 0, width, height);
-
-  return canvas.toDataURL('image/jpeg', quality); // compressed
-}
 export async function printBookingPDF(booking: Booking) {
   try {
     // توليد QR Code
@@ -68,35 +48,35 @@ export async function printBookingPDF(booking: Booking) {
         {
           errorCorrectionLevel: 'H',
           type: 'image/png',
-          width: 140,
+          width: 250,
           margin: 1,
           color: { dark: '#000000', light: '#FFFFFF' },
         }
       );
     }
-    
 
     // تحويل الشعار والخطوط إلى base64 لضمان ظهورهما في PDF
     const logoBase64 = await fileToBase64('/logo-gold.png');
-    // const cairoRegularBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Regular_e0244124.ttf');
-    // const cairoBoldBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Bold_04b1eaa6.ttf');
+    const cairoRegularBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Regular_e0244124.ttf');
+    const cairoBoldBase64 = await fileToBase64('https://d2xsxph8kpxj0f.cloudfront.net/310519663380986397/ALmxfXzXdGwygXSTLhzNJo/Cairo-Bold_04b1eaa6.ttf');
 
+    const customerWelcomeBase64 = await fileToBase64('/1.jpg.jpeg');
 
     // تضمين خط Cairo مباشرة كـ base64 لضمان الربط الصحيح للحروف العربية
-    // const fontFaceCSS = `
-    //   @font-face {
-    //     font-family: 'Cairo';
-    //     font-weight: 400;
-    //     font-style: normal;
-    //     src: url('${cairoRegularBase64}') format('truetype');
-    //   }
-    //   @font-face {
-    //     font-family: 'Cairo';
-    //     font-weight: 700;
-    //     font-style: normal;
-    //     src: url('${cairoBoldBase64}') format('truetype');
-    //   }
-    // `;
+    const fontFaceCSS = `
+      @font-face {
+        font-family: 'Cairo';
+        font-weight: 400;
+        font-style: normal;
+        src: url('${cairoRegularBase64}') format('truetype');
+      }
+      @font-face {
+        font-family: 'Cairo';
+        font-weight: 700;
+        font-style: normal;
+        src: url('${cairoBoldBase64}') format('truetype');
+      }
+    `;
 
     const fontFamily = "'Cairo', Arial, Tahoma, sans-serif";
 
@@ -105,7 +85,7 @@ export async function printBookingPDF(booking: Booking) {
       <div style="width:210mm;min-height:296mm;padding:15mm 20mm;background:#1e1b1c;position:relative;direction:rtl;font-family:${fontFamily};color:#d4a574;box-sizing:border-box;">
         <!-- الشعار في الأعلى - مكبر -->
         <div style="text-align:center;margin-bottom:6px;padding-top:5mm;">
-          ${logoBase64 ? `<img src="/logo-gold.png"alt="Logo" style="width:185px;height:185px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:185px;height:185px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
 " />` : ''}
         </div>
         
@@ -201,10 +181,9 @@ export async function printBookingPDF(booking: Booking) {
   </ul>
 </div>
         <!-- التذييل -->
-        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:12px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:6px;">Boulevard Sana'a | بوليفارد صنعاء</div>
+        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:12px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:8px;">Boulevard Sana'a | بوليفارد صنعاء</div>
       </div>
-    `;
-    const welcomePageHTML = `
+    `;const welcomePageHTML = `
   <div style="
     width:210mm;
     height:296mm;
@@ -212,7 +191,7 @@ export async function printBookingPDF(booking: Booking) {
     position: relative;
     overflow: hidden;
   ">
-    <img src="/1.png" 
+    <img src="${customerWelcomeBase64}" 
      style="
        width:100%;
        height:100%;
@@ -226,7 +205,7 @@ export async function printBookingPDF(booking: Booking) {
       <div style="width:210mm;min-height:296mm;padding:20mm;background:#1e1b1c;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;direction:rtl;font-family:${fontFamily};color:#d4a574;box-sizing:border-box;page-break-before:always;">
         <!-- الشعار في صفحة الباركود -->
           <div style="text-align:center;margin-bottom:10px;padding-top:5mm;">
-          ${logoBase64 ? `<img src="/logo-gold.png"alt="Logo" style="width:200px;height:200px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+          ${logoBase64 ? `<img src="${logoBase64}" alt="Logo" style="width:200px;height:200px;object-fit:contain;display:inline-block;       filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
 " />` : ''}
         </div>
         <!-- خط زخرفي -->
@@ -247,7 +226,7 @@ export async function printBookingPDF(booking: Booking) {
         <div style="text-align:center;margin-top:22px;font-size:14px;color:#E6C97A;">
           ${booking.id ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">رقم الحجز:</span> <span style="font-family: Arial, monospace, sans-serif !important;">${booking.id}</span></div>` : ''}
           ${booking.name ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">اسم الضيف:</span> ${booking.name}</div>` : ''}
-          ${booking.checkInDate ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;"> تاريخ الحجز:</span> <span style="font-family: Arial, monospace, sans-serif !important;">${booking.checkInDate}</span></div>` : ''}
+          ${booking.checkInDate ? `<div style="margin-bottom:16px;"><span style="font-weight:bold;">Booking Date:</span> <span style="font-family: Arial, monospace, sans-serif !important;">${booking.checkInDate}</span></div>` : ''}
         </div>
         <div style="text-align:center;margin-top:18px;font-size:18px;color:#E6C97A;max-width:80%;">امسح رمز الاستجابة السريعة للوصول إلى تفاصيل حجزك والاستمتاع بالامتيازات الحصرية</div>
         <!-- التذييل -->
@@ -257,10 +236,10 @@ export async function printBookingPDF(booking: Booking) {
 
     // بناء HTML الكامل مع تضمين الخط
    const fullHTML = `
-  <div style="font-family:${fontFamily}; font-size:18px;">
+  <div style="font-family:${fontFamily};">
     <style>
-       body { font-family: ${fontFamily}; }
-
+      ${fontFaceCSS}
+      body { font-family: ${fontFamily}; }
     </style>
 
     ${invoicePageHTML}        <!-- الصفحة الأولى -->
@@ -300,27 +279,23 @@ export async function printBookingPDF(booking: Booking) {
     await new Promise(resolve => setTimeout(resolve, 1200));
 
     const contentEl = wrapper.firstElementChild as HTMLElement;
-const opt = {
-  margin: 0,
-  filename: `booking-${booking.id}.pdf`,
 
-  image: { type: 'jpeg', quality: 0.7 },
+    const opt = {
+      margin: 0,
+      filename: `booking-${booking.id}.pdf`,
+      image: { type: 'png' as const, quality: 0.92 },
+      html2canvas: { 
+       scale: 4,   // 🔥 جودة عالية جداً
+        useCORS: true,
+        backgroundColor: '#1e1b1c',
+        logging: false,
+        width: contentEl ? contentEl.scrollWidth : undefined,
+        height: contentEl ? contentEl.scrollHeight : undefined,
+      },
+      jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const },
+      pagebreak: { mode: ['css', 'legacy'] as string[] }
+    };
 
-  html2canvas: { 
-    scale: 1.5,
-    useCORS: true,
-    backgroundColor: '#1e1b1c',
-    logging: false,
-  },
-
-  jsPDF: { 
-    unit: 'mm',
-    format: 'a4',
-    orientation: 'portrait'
-  },
-
-  pagebreak: { mode: ['css', 'legacy'] }
-};
     await (html2pdf() as any).set(opt).from(contentEl).save();
     
     // تنظيف
