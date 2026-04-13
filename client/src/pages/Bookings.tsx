@@ -83,9 +83,9 @@ export default function Bookings() {
   <h3 className="text-xl font-semibold text-[#C5A059] mb-2 text-right">
     {booking.name}
   </h3>
-  <p className="text-[#C5A059] text-right">
-    تايخ الحجز : <p className="text-[#C5A059] font-semibold date-display">{new Date(booking.checkInDate).toLocaleDateString('en-US')}
-  </p></p>
+<p className="text-[#C5A059] text-right">
+    تاريخ المناسبة : <p className="text-[#C5A059] font-semibold date-display">{booking.eventDate ? new Date(booking.eventDate).toLocaleDateString('en-US') : 'غير محدد'}</p>
+  </p>
 </div>
                     </div>
                     
