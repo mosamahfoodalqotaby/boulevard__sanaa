@@ -26,7 +26,7 @@ export default function QRNameInput() {
   };
 
   const images = [
-    '/1.jpg.jpeg',
+    '/1234.jpg.jpeg',
     '/2.jpeg',
     '/3.jpeg',
     '/4.jpeg',

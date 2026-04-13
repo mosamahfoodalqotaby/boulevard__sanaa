@@ -40,7 +40,7 @@ export default function Contact() {
                   <Phone className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-[#C5A059] mb-2">الهاتف</h3>
-                <p className="text-[#C5A059] font-mono font-bold text-lg tracking-wide">+967 7844 42228</p>
+                <p className="text-[#C5A059] font-mono font-bold text-lg tracking-wide">+967784442228</p>
                 <p className="text-[#C5A059] text-sm mt-1">متاح 24/7</p>
               </div>
 
@@ -50,7 +50,7 @@ export default function Contact() {
                   <Mail className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-[#C5A059] mb-2">البريد الإلكتروني</h3>
-                <p className="text-[#C5A059] font-mono">zaidmotahr@gmail.com</p>
+                <p className="text-[#C5A059] font-mono">boulevardsanaa1@gmail.com</p>
                 <p className="text-[#C5A059] text-sm mt-1">نرد خلال 24 ساعة</p>
               </div>
 

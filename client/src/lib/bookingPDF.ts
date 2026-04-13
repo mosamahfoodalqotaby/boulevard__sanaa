@@ -201,7 +201,7 @@ export async function printBookingPDF(booking: Booking) {
   </ul>
 </div>
         <!-- التذييل -->
-        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:12px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:6px;">Boulevard Sana'a | بوليفارد صنعاء</div>
+        <div style="position:absolute;bottom:10mm;left:20mm;right:20mm;text-align:center;font-size:12px;color:#E6C97A;border-top:1px solid rgba(197,160,89,0.3);padding-top:8px;">Boulevard Sana'a | بوليفارد صنعاء</div>
       </div>
     `;
     const welcomePageHTML = `

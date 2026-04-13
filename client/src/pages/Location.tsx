@@ -91,7 +91,7 @@ export default function Location() {
                   <Mail className="text-[#C5A059] flex-shrink-0 mt-1" size={24} />
                   <div>
                     <h3 className="text-xl font-bold text-[#C5A059] mb-2">البريد الإلكتروني</h3>
-                    <p className="text-[#C5A059]/80">zaidmotahr@gmail.com</p>
+                    <p className="text-[#C5A059]/80">boulevardsanaa1@gmail.com</p>
                   </div>
                 </div>
               </div>

@@ -131,7 +131,7 @@ export default function QRWelcome() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Mail className="w-5 h-5 text-[#b89447]" />
-                        <span>zaidmotahr@gmail.com</span>
+                        <span>boulevardsanaa1@gmail.com</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-5 h-5 text-[#b89447]" />

@@ -73,7 +73,7 @@ className={`fixed right-0 top-0 h-screen w-64 bg-[#1e1b1c] border-l border-[#C5A
             <Mail className="text-[#C5A059] flex-shrink-0 mt-1" size={20} />
             <div className="text-sm">
               <p className="font-semibold text-[#C5A059]">البريد</p>
-<p className="text-[#C5A059]/80 font-mono">zaidmotaher@gmail.com</p>
+<p className="text-[#C5A059]/80 font-mono">boulevardsanaa1@gmail.com</p>
             </div>
           </div>
         </div>
