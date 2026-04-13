@@ -35,9 +35,9 @@ export default function QRCodeScanner() {
             alt={`صورة ${index + 1}`}
 className="w-full h-full object-contain"
           />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white text-4xl font-bold drop-shadow-2xl z-10">
-            صفحة {index + 1}
-          </div>
+          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white text-4xl font-bold drop-shadow-2xl z-10">
+            {index + 1}
+          </div> */}
         </div>
       ))}
     </div>
