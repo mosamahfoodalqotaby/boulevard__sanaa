@@ -163,18 +163,51 @@ export const appRouter = router({
         }
       }),
 
-    update: protectedProcedure
+    update: publicProcedure
       .input(z.object({
         id: z.number(),
+        name: z.string().optional(),
+        phone: z.string().optional(),
+        serviceType: z.enum(['chalet', 'hall', 'both']).optional(),
+        checkInDate: z.string().optional(),
+        eventDate: z.string().optional(),
+        guestCount: z.number().optional(),
+        totalPrice: z.string().optional(),
+        paidAmount: z.string().optional(),
+        remainingAmount: z.string().optional(),
+        specialRequests: z.string().optional(),
+        additionalDetails: z.string().optional(),
+        generateQRCode: z.boolean().optional(),
         status: z.enum(['pending', 'confirmed', 'cancelled']).optional(),
-        notes: z.string().optional(),
       }))
       .mutation(async ({ input, ctx }) => {
         try {
+          // التحقق من صحة التواريخ إذا تم تغييرها
+          if (input.checkInDate || input.eventDate) {
+            const checkInDate = input.checkInDate ? new Date(input.checkInDate) : new Date();
+            const eventDate = input.eventDate ? new Date(input.eventDate) : checkInDate;
+            if (eventDate < checkInDate) {
+              throw new Error('تاريخ المناسبة يجب أن يكون بعد تاريخ الوصول');
+            }
+          }
+
+          // تحديث الحجز
           await db.updateBooking(input.id, {
+            customerName: input.name,
+            customerPhone: input.phone,
+            type: input.serviceType,
+            startDate: input.checkInDate,
+            eventDate: input.eventDate,
+            guestCount: input.guestCount,
+            price: input.totalPrice ? parseFloat(input.totalPrice) : undefined,
+            paidAmount: input.paidAmount,
+            remainingAmount: input.remainingAmount,
+            notes: input.specialRequests,
+            additionalDetails: input.additionalDetails,
+            generateQRCode: input.generateQRCode,
             status: input.status,
-            notes: input.notes,
           });
+
           try {
             await db.logActivity({
               userId: ctx.user?.id || 1,
